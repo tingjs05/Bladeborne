@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // i hate my life
-
     // current state
     private PlayerBaseState state;
 
