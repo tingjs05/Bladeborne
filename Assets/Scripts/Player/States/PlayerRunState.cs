@@ -6,13 +6,14 @@ public class PlayerRunState : PlayerBaseState
 
     public override void OnEnter(PlayerController player)
     {
-        
+        // play run animation
+        player.playerAnimator.Play("Player_Run");
     }
 
     public override void OnUpdate(PlayerController player)
     {
         // prioritize checking for dodge
-        if (Input.GetKey(player.dodgeKey) && player.stamina >= player.dodgeStaminaCost)
+        if (Input.GetKeyDown(player.dodgeKey) && player.stamina >= player.dodgeStaminaCost)
         {
             player.switchState(player.dodge);
         }

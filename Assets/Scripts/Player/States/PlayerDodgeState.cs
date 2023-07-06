@@ -7,6 +7,9 @@ public class PlayerDodgeState : PlayerBaseState
 
     public override void OnEnter(PlayerController player)
     {   
+        // play dodge animation
+        player.playerAnimator.Play("Player_Dodge");
+
         // update input so that can get input
         player.updateInput();
         // update position variables

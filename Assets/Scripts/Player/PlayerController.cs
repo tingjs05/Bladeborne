@@ -29,6 +29,20 @@ public class PlayerController : MonoBehaviour
     [Header("Weapon")]
     public GameObject weapon;
 
+    // sprite
+    [Header("Sprite")]
+    public GameObject playerSprite;
+    [HideInInspector]
+    public SpriteRenderer playerRenderer;
+    [HideInInspector]
+    public Animator playerAnimator;
+    [HideInInspector]
+    public GameObject weaponSprite;
+    [HideInInspector]
+    public SpriteRenderer weaponRenderer;
+    [HideInInspector]
+    public Animator weaponAnimator;
+
     // stamina
     [Header("Stamina")]
     public float maxStamina = 100.0f;
@@ -72,6 +86,17 @@ public class PlayerController : MonoBehaviour
         // get components
         rb = GetComponent<Rigidbody2D>();
 
+        // get weapon sprite object from weapon object
+        weaponSprite = weapon.transform.GetChild (0).gameObject;
+
+        // get animator components
+        playerAnimator = playerSprite.GetComponent<Animator>();
+        weaponAnimator = weaponSprite.GetComponent<Animator>();
+
+        // get sprite renderer components
+        playerRenderer = playerSprite.GetComponent<SpriteRenderer>();
+        weaponRenderer = weaponSprite.GetComponent<SpriteRenderer>();
+
         // set input to no input
         input = new Vector2(0, 0);
 
@@ -104,6 +129,16 @@ public class PlayerController : MonoBehaviour
 
         // update input
         input = new Vector2(horizontalInput, verticalInput).normalized;
+
+        // flip player sprite if facing the other way
+        if (horizontalInput < 0)
+        {
+            playerRenderer.flipX = true;
+        }
+        else if (horizontalInput > 0)
+        {
+            playerRenderer.flipX = false;
+        }
     }
 
     public void updateCurrentPos()
@@ -133,15 +168,15 @@ public class PlayerController : MonoBehaviour
         // rotate weapon
         weapon.transform.right = direction;
 
-        // make weapon go behind player if above player
-        // if (direction.x < 1 && direction.x > -1)
-        // {
-        //     weapon.transform.position = new Vector3(weapon.transform.position.x, weapon.transform.position.y, -1);
-        // }
-        // else
-        // {
-        //     weapon.transform.position = new Vector3(weapon.transform.position.x, weapon.transform.position.y, 0);
-        // }
+        // flip weapon when facing the other direction
+        if (direction.x < 0)
+        {
+            weapon.transform.localScale = new Vector3(1, -1, 1);
+        }
+        else if (direction.x > 0)
+        {
+            weapon.transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 
     // switch state method

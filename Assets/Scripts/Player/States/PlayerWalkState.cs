@@ -6,7 +6,8 @@ public class PlayerWalkState : PlayerBaseState
 
     public override void OnEnter(PlayerController player)
     {
-
+        // play walk animation
+        player.playerAnimator.Play("Player_Walk");
     }
 
     public override void OnUpdate(PlayerController player)
@@ -19,12 +20,12 @@ public class PlayerWalkState : PlayerBaseState
         }
 
         // prioritize checking for dodge
-        if (Input.GetKey(player.dodgeKey) && player.stamina >= player.dodgeStaminaCost)
+        if (Input.GetKeyDown(player.dodgeKey) && player.stamina >= player.dodgeStaminaCost)
         {
             player.switchState(player.dodge);
         }
         // sprint if sprintKey is pressed and required stamina is met
-        else if (Input.GetKeyDown(player.sprintKey) && player.stamina >= minSprintStamina)
+        else if (Input.GetKey(player.sprintKey) && player.stamina >= minSprintStamina)
         {
             player.switchState(player.run);
         }

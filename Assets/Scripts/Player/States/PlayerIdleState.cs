@@ -6,6 +6,9 @@ public class PlayerIdleState : PlayerBaseState
     {
         // set velocity to 0 when in idle state
         player.rb.velocity = new Vector2(0, 0);
+
+        // play idle animation
+        player.playerAnimator.Play("Player_Idle");
     }
 
     public override void OnUpdate(PlayerController player)
@@ -18,7 +21,7 @@ public class PlayerIdleState : PlayerBaseState
         }
 
         // prioritize checking for dodge
-        if (Input.GetKey(player.dodgeKey) && player.stamina >= player.dodgeStaminaCost)
+        if (Input.GetKeyDown(player.dodgeKey) && player.stamina >= player.dodgeStaminaCost)
         {
             player.switchState(player.dodge);
         }
