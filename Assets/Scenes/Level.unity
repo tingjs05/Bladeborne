@@ -201,6 +201,9 @@ MonoBehaviour:
   rb: {fileID: 0}
   input: {x: 0, y: 0}
   weapon: {fileID: 1944933101}
+  isSheathed: 0
+  sheath: 113
+  attack: 323
   playerSprite: {fileID: 1851182753}
   playerRenderer: {fileID: 0}
   playerAnimator: {fileID: 0}
@@ -339,7 +342,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -148541662, guid: 06e82d51c6675734da60f62a27c0196b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

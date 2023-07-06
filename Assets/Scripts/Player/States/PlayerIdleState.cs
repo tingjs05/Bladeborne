@@ -13,6 +13,17 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void OnUpdate(PlayerController player)
     {
+        // check if the player wants to sheath weapon
+        if (Input.GetKeyDown(player.sheath))
+        {
+            player.toggleSheath();
+        }
+        // update weapon rotation if weapon is not sheathed
+        if (!player.isSheathed)
+        {
+            player.aimWeapon();
+        }
+
         // only increase stamina when below max
         if (player.stamina < player.maxStamina)
         {

@@ -16,6 +16,12 @@ public class PlayerController : MonoBehaviour
     public PlayerRunState run {get; set;}
     [HideInInspector]
     public PlayerDodgeState dodge {get; set;}
+    [HideInInspector]
+    public PlayerFirstAttackState attack1 {get; set;}
+    [HideInInspector]
+    public PlayerSecondAttackState attack2 {get; set;}
+    [HideInInspector]
+    public PlayerThirdAttackState attack3 {get; set;}
 
     // get components
     [HideInInspector]
@@ -28,6 +34,12 @@ public class PlayerController : MonoBehaviour
     // game objects
     [Header("Weapon")]
     public GameObject weapon;
+    [HideInInspector]
+    public bool isSheathed = false;
+    [HideInInspector]
+    public KeyCode sheath = KeyCode.Q;
+    [HideInInspector]
+    public KeyCode attack = KeyCode.Mouse0;
 
     // sprite
     [Header("Sprite")]
@@ -78,6 +90,9 @@ public class PlayerController : MonoBehaviour
         walk = new PlayerWalkState();
         run = new PlayerRunState();
         dodge = new PlayerDodgeState();
+        attack1 = new PlayerFirstAttackState();
+        attack2 = new PlayerSecondAttackState();
+        attack3 = new PlayerThirdAttackState();
     }
 
     // Start is called before the first frame update
@@ -110,9 +125,6 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Stamina: " + stamina);
 
-        // update weapon rotation
-        aimWeapon();
-
         // update input
         updateInput();
 
@@ -134,10 +146,22 @@ public class PlayerController : MonoBehaviour
         if (horizontalInput < 0)
         {
             playerRenderer.flipX = true;
+
+            // flip weapon as well if sheathed
+            if (isSheathed)
+            {
+                weapon.transform.localScale = new Vector3(-1, 1, 1);
+            }
         }
         else if (horizontalInput > 0)
         {
             playerRenderer.flipX = false;
+
+            // flip weapon as well if sheathed
+            if (isSheathed)
+            {
+                weapon.transform.localScale = new Vector3(1, 1, 1);
+            }
         }
     }
 
@@ -176,6 +200,56 @@ public class PlayerController : MonoBehaviour
         else if (direction.x > 0)
         {
             weapon.transform.localScale = new Vector3(1, 1, 1);
+        }
+
+        //make weapon go behind player if above player
+        if (direction.y > 0.5f)
+        {
+            weaponRenderer.sortingOrder = -1;
+        }
+        else
+        {
+            weaponRenderer.sortingOrder = 1;
+        }
+    }
+
+    // sheath weapon
+    public void toggleSheath()
+    {
+        if (isSheathed)
+        {
+            // unsheath weapon if sheathed
+            isSheathed = false;
+
+            // change to idle animation
+            weaponAnimator.Play("Weapon_Idle");
+
+            // reset adjusted position of weapon
+            weaponSprite.transform.Translate(new Vector3(0.1f, 0f, 0f));
+
+            // reset weapon flipX if weapon was flipped when sheathed
+            weapon.transform.localScale = new Vector3(1, 1, 1);
+
+            // make weapon appear in front of player
+            weaponRenderer.sortingOrder = 1;
+        }
+        else
+        {
+            // sheath weapon if unsheathed
+            isSheathed = true;
+
+            // change to sheath animation
+            weaponAnimator.Play("Weapon_Sheath");
+
+            // reset weapon rotation before sheathing weapon
+            weapon.transform.right = new Vector2(0, 0);
+            weapon.transform.localScale = new Vector3(1, 1, 1);
+
+            // adjust position of weapon
+            weaponSprite.transform.Translate(new Vector3(-0.1f, 0f, 0f));
+
+            // make weapon appear behind the player
+            weaponRenderer.sortingOrder = -1;
         }
     }
 

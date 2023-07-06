@@ -3,11 +3,19 @@ using UnityEngine;
 public class PlayerRunState : PlayerBaseState
 {
     private float staminaSecondCount = 0.0f;
+    private bool sheathedToRun = false;
 
     public override void OnEnter(PlayerController player)
     {
         // play run animation
         player.playerAnimator.Play("Player_Run");
+
+        //check if player's weapon is sheathed, otherwise sheath weapon
+        if (!player.isSheathed)
+        {
+            player.toggleSheath();
+            sheathedToRun = true;
+        }
     }
 
     public override void OnUpdate(PlayerController player)
@@ -17,8 +25,8 @@ public class PlayerRunState : PlayerBaseState
         {
             player.switchState(player.dodge);
         }
-        // continue sprinting if sprintKey is pressed and stamina is not 0
-        else if (Input.GetKey(player.sprintKey) && player.stamina >= 0)
+        // continue sprinting if sprintKey is pressed and stamina is not 0 and there is movement input
+        else if (Input.GetKey(player.sprintKey) && player.stamina >= 0 && player.input != new Vector2(0, 0))
         {
             player.rb.velocity = player.input * player.sprintSpeed;
 
@@ -44,6 +52,11 @@ public class PlayerRunState : PlayerBaseState
 
     public override void OnExit(PlayerController player)
     {
-
+        // unsheath weapon if it is sheathed to run
+        if (sheathedToRun)
+        {
+            player.toggleSheath();
+            sheathedToRun = false;
+        }
     }
 }

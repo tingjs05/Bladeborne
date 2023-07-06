@@ -4,11 +4,19 @@ public class PlayerDodgeState : PlayerBaseState
 {
     private float currentDodgeSpeed;
     private Vector2 dodgeDirection;
+    private bool sheathedToDodge = false;
 
     public override void OnEnter(PlayerController player)
-    {   
+    {
         // play dodge animation
         player.playerAnimator.Play("Player_Dodge");
+
+        //check if player's weapon is sheathed, otherwise sheath weapon
+        if (!player.isSheathed)
+        {
+            player.toggleSheath();
+            sheathedToDodge = true;
+        }
 
         // update input so that can get input
         player.updateInput();
@@ -51,6 +59,11 @@ public class PlayerDodgeState : PlayerBaseState
 
     public override void OnExit(PlayerController player)
     {
-
+        // unsheath weapon if it is sheathed to run
+        if (sheathedToDodge)
+        {
+            player.toggleSheath();
+            sheathedToDodge = false;
+        }
     }
 }
