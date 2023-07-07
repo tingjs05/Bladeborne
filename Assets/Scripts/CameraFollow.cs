@@ -6,7 +6,7 @@ public class CameraFollow : MonoBehaviour
 {
     // game object to follow
     public GameObject targetObject;
-    public float followSpeed = 2.5f;
+    public float followSpeed = 1.5f;
 
     // define variables
     private Vector3 targetPosition;
