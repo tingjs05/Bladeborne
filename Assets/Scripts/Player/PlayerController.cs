@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // update variable methods
-    public void updateInput()
+    public void updateInput(bool flip = true)
     {
         // get inputs
         float horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -143,6 +143,12 @@ public class PlayerController : MonoBehaviour
 
         // update input
         input = new Vector2(horizontalInput, verticalInput).normalized;
+
+        // exit function if don't need to flip player and weapon according to input
+        if (!flip)
+        {
+            return;
+        }
 
         // flip player sprite if facing the other way
         if (horizontalInput < 0)

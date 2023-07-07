@@ -5,6 +5,7 @@ public class PlayerSecondAttackState : PlayerBaseState
     private float maxStateDuration = 0.4f;
     private float durationInState;
     private bool backToIdle = false;
+    private bool moving = false;
 
     public override void OnEnter(PlayerController player)
     {
@@ -17,6 +18,27 @@ public class PlayerSecondAttackState : PlayerBaseState
 
     public override void OnUpdate(PlayerController player)
     {
+        // update input
+        player.updateInput(false);
+        // move player if there is input
+        if (player.input != new Vector2(0, 0))
+        {
+            // move player
+            player.rb.velocity = player.input * player.walkSpeed;
+            // set animation to walk
+            player.playerAnimator.Play("Player_Walk");
+            // set moving boolean
+            moving = true;
+        }
+        // if moving and no input, reset to idle
+        else if (moving)
+        {
+            // reset animation to idle
+            player.playerAnimator.Play("Player_Idle");
+            // reset moving boolean
+            moving = false;
+        }
+
         // check for chain attack
         if (Input.GetKeyDown(player.attackKey) && durationInState < maxStateDuration)
         {
