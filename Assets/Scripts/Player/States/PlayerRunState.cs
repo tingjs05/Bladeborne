@@ -20,6 +20,9 @@ public class PlayerRunState : PlayerBaseState
 
     public override void OnUpdate(PlayerController player)
     {
+        // update input
+        player.updateInput();
+
         // prioritize checking for dodge
         if (Input.GetKeyDown(player.dodgeKey) && player.stamina >= player.dodgeStaminaCost)
         {

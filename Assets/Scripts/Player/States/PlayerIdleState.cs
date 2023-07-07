@@ -13,8 +13,24 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void OnUpdate(PlayerController player)
     {
+        // update input
+        player.updateInput();
+
+        // check if the player wants to attack
+        if (Input.GetKeyDown(player.attackKey))
+        {
+            // unsheath weapon if sheathed
+            if (player.isSheathed)
+            {
+                player.toggleSheath();
+                // aim weapon to set mouse position
+                player.aimWeapon();
+            }
+            player.switchState(player.attack1);
+        }
+
         // check if the player wants to sheath weapon
-        if (Input.GetKeyDown(player.sheath))
+        if (Input.GetKeyDown(player.sheathKey))
         {
             player.toggleSheath();
         }

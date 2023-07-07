@@ -31,15 +31,17 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public Vector2 input;
 
-    // game objects
+    // weapon and attacks
     [Header("Weapon")]
     public GameObject weapon;
     [HideInInspector]
+    public Vector2 mouseDirection;
+    [HideInInspector]
     public bool isSheathed = false;
     [HideInInspector]
-    public KeyCode sheath = KeyCode.Q;
+    public KeyCode sheathKey = KeyCode.Q;
     [HideInInspector]
-    public KeyCode attack = KeyCode.Mouse0;
+    public KeyCode attackKey = KeyCode.Mouse0;
 
     // sprite
     [Header("Sprite")]
@@ -118,15 +120,15 @@ public class PlayerController : MonoBehaviour
         // set default state
         state = idle;
         state.OnEnter(this);
+
+        // start with sheathed weapon
+        toggleSheath();
     }
 
     // Update is called once per frame
     void Update()
     {
         Debug.Log("Stamina: " + stamina);
-
-        // update input
-        updateInput();
 
         // update state
         state.OnUpdate(this);
@@ -187,23 +189,25 @@ public class PlayerController : MonoBehaviour
         updateMousePos();
 
         // get direction
-        Vector2 direction = mouseWorldPos - currentPos;
+        mouseDirection = mouseWorldPos - currentPos;
 
         // rotate weapon
-        weapon.transform.right = direction;
+        weapon.transform.right = mouseDirection;
 
-        // flip weapon when facing the other direction
-        if (direction.x < 0)
+        // flip weapon and player when facing the other direction
+        if (mouseDirection.x < 0)
         {
             weapon.transform.localScale = new Vector3(1, -1, 1);
+            playerRenderer.flipX = true;
         }
-        else if (direction.x > 0)
+        else if (mouseDirection.x > 0)
         {
             weapon.transform.localScale = new Vector3(1, 1, 1);
+            playerRenderer.flipX = false;
         }
 
         //make weapon go behind player if above player
-        if (direction.y > 0.5f)
+        if (mouseDirection.y > 0.5f)
         {
             weaponRenderer.sortingOrder = -1;
         }

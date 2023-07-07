@@ -201,9 +201,10 @@ MonoBehaviour:
   rb: {fileID: 0}
   input: {x: 0, y: 0}
   weapon: {fileID: 1944933101}
+  mouseDirection: {x: 0, y: 0}
   isSheathed: 0
-  sheath: 113
-  attack: 323
+  sheathKey: 113
+  attackKey: 323
   playerSprite: {fileID: 1851182753}
   playerRenderer: {fileID: 0}
   playerAnimator: {fileID: 0}
@@ -218,7 +219,7 @@ MonoBehaviour:
   staminaDrainPerSecond: 1
   sprintKey: 304
   dodgeSpeed: 15
-  dodgeSpeedDropOffScale: 50
+  dodgeSpeedDropOffScale: 100
   minDodgeSpeed: 5
   dodgeStaminaCost: 20
   currentPos: {x: 0, y: 0}

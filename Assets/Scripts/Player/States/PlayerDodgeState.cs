@@ -45,6 +45,10 @@ public class PlayerDodgeState : PlayerBaseState
 
     public override void OnUpdate(PlayerController player)
     {
+        // update input
+        player.updateInput();
+
+        // continue dodging
         player.rb.velocity = dodgeDirection * currentDodgeSpeed;
         if (currentDodgeSpeed >= player.minDodgeSpeed)
         {
