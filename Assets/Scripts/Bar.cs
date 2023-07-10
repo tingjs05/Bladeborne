@@ -11,6 +11,12 @@ public class Bar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        getSliders();
+    }
+
+    // get sliders from the bars and add to sliders list
+    void getSliders()
+    {
         // create empty list for sliders
         sliders = new List<Slider>();
 
@@ -31,8 +37,12 @@ public class Bar : MonoBehaviour
     }
 
     // set the max amount for the bar
-    public void setMax(int maxAmount)
+    public void setMax(float maxAmount)
     {
+        // add sliders to sliders list
+        getSliders();
+
+        // set each slider
         foreach (Slider slider in sliders)
         {
             // set max value of slider
@@ -43,8 +53,12 @@ public class Bar : MonoBehaviour
     }
 
     // change the value of the bar
-    public void setValue(int value)
+    public void setValue(float value)
     {
+        // add sliders to sliders list
+        getSliders();
+
+        // set each slider
         foreach (Slider slider in sliders)
         {
             // set slider value to current value

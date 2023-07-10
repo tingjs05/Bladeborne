@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -137,8 +136,8 @@ public class PlayerController : MonoBehaviour
         stamina = maxStamina;
 
         // set health and stamina bar
-        healthBar.setMax((int) Math.Round(maxHealth));
-        staminaBar.setMax((int) Math.Round(maxStamina));
+        healthBar.setMax(maxHealth);
+        staminaBar.setMax(maxStamina);
 
         // set input to no input
         input = new Vector2(0, 0);
@@ -155,8 +154,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // update health and stamina bar
-        healthBar.setValue((int) Math.Round(health));
-        staminaBar.setValue((int) Math.Round(stamina));
+        healthBar.setValue(health);
+        staminaBar.setValue(stamina);
 
         // update state
         state.OnUpdate(this);
