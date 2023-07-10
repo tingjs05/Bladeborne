@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         // get weapon sprite object from weapon object
-        weaponSprite = weapon.transform.GetChild (0).gameObject;
+        weaponSprite = weapon.transform.GetChild(0).gameObject;
 
         // get animator components
         playerAnimator = playerSprite.GetComponent<Animator>();
