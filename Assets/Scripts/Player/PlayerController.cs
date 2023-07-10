@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,12 +58,25 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public Animator weaponAnimator;
 
+    // health
+    [Header("Health")]
+    public float maxHealth = 1000.0f;
+    [HideInInspector]
+    public float health;
+
     // stamina
     [Header("Stamina")]
     public float maxStamina = 100.0f;
     public float staminaGainPerSecond = 10.0f;
     [HideInInspector]
-    public float stamina = 100.0f;
+    public float stamina;
+
+    // health and stamina bar
+    [Header("UI")]
+    public GameObject healthBarObject;
+    public GameObject staminaBarObject;
+    private Bar healthBar;
+    private Bar staminaBar;
 
     // movement
     [Header("Movement")]
@@ -114,6 +128,18 @@ public class PlayerController : MonoBehaviour
         playerRenderer = playerSprite.GetComponent<SpriteRenderer>();
         weaponRenderer = weaponSprite.GetComponent<SpriteRenderer>();
 
+        // get bar component
+        healthBar = healthBarObject.GetComponent<Bar>();
+        staminaBar = staminaBarObject.GetComponent<Bar>();
+
+        // set health and stamina to max
+        health = maxHealth;
+        stamina = maxStamina;
+
+        // set health and stamina bar
+        healthBar.setMax((int) Math.Round(maxHealth));
+        staminaBar.setMax((int) Math.Round(maxStamina));
+
         // set input to no input
         input = new Vector2(0, 0);
 
@@ -128,7 +154,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Stamina: " + stamina);
+        // update health and stamina bar
+        healthBar.setValue((int) Math.Round(health));
+        staminaBar.setValue((int) Math.Round(stamina));
 
         // update state
         state.OnUpdate(this);
