@@ -39,6 +39,13 @@ public class PlayerSecondAttackState : PlayerBaseState
             moving = false;
         }
 
+        // only increase stamina when below max
+        if (player.stamina < player.maxStamina)
+        {
+            // increase stamina every second
+            player.stamina += player.staminaGainPerSecond * Time.deltaTime;
+        }
+
         // check for chain attack
         if (Input.GetKeyDown(player.attackKey) && durationInState < maxStateDuration)
         {
