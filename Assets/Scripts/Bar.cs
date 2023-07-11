@@ -46,9 +46,9 @@ public class Bar : MonoBehaviour
         foreach (Slider slider in sliders)
         {
             // set max value of slider
-            slider.maxValue = maxAmount / sliders.Count;
+            slider.maxValue = maxAmount;
             // set current value to max value
-            slider.value = maxAmount / sliders.Count;
+            slider.value = maxAmount;
         }
     }
 

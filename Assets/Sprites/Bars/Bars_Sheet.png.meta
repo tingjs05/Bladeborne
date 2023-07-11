@@ -147,11 +147,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
+        y: 64
         width: 128
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -168,11 +168,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 32
         width: 128
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -180,6 +180,27 @@ TextureImporter:
       bones: []
       spriteID: ec0ba2c2fda762b47b2ee3d07c4e0430
       internalID: -1088173827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars_Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57f19673098dde54ba8c040ebabec2ae
+      internalID: 280029989
       vertices: []
       indices: 
       edges: []
@@ -197,6 +218,7 @@ TextureImporter:
     nameFileIdTable:
       Bars_Sheet_0: -1740159447
       Bars_Sheet_1: -1088173827
+      Bars_Sheet_2: 280029989
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
