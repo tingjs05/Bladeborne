@@ -8,95 +8,71 @@ public class PlayerController : MonoBehaviour
     private PlayerBaseState state;
 
     // states
-    [HideInInspector]
     public PlayerIdleState idle {get; private set;}
-    [HideInInspector]
     public PlayerWalkState walk {get; private set;}
-    [HideInInspector]
     public PlayerRunState run {get; private set;}
-    [HideInInspector]
     public PlayerDodgeState dodge {get; private set;}
-    [HideInInspector]
     public PlayerFirstAttackState attack1 {get; private set;}
-    [HideInInspector]
     public PlayerSecondAttackState attack2 {get; private set;}
-    [HideInInspector]
     public PlayerThirdAttackState attack3 {get; private set;}
 
     // get components
-    [HideInInspector]
-    public Rigidbody2D rb;
+    [HideInInspector] public Rigidbody2D rb;
 
     // inputs by the player to update every frame
-    [HideInInspector]
-    public Vector2 input;
+    public Vector2 input {get; private set;}
 
     // weapon and attacks
     [Header("Weapon")]
-    public GameObject weapon;
-    [HideInInspector]
-    public Vector2 mouseDirection;
-    [HideInInspector]
-    public bool isSheathed = false;
-    [HideInInspector]
-    public KeyCode sheathKey = KeyCode.Q;
-    [HideInInspector]
-    public KeyCode attackKey = KeyCode.Mouse0;
+    [SerializeField] private GameObject weapon;
+    public Vector2 mouseDirection {get; private set;}
+    public bool isSheathed {get; private set;} = false;
+    public KeyCode sheathKey {get; private set;} = KeyCode.Q;
+    public KeyCode attackKey {get; private set;} = KeyCode.Mouse0;
 
     // sprite
     [Header("Sprite")]
-    public GameObject playerSprite;
-    [HideInInspector]
-    public SpriteRenderer playerRenderer;
-    [HideInInspector]
-    public Animator playerAnimator;
-    [HideInInspector]
-    public GameObject weaponSprite;
-    [HideInInspector]
-    public SpriteRenderer weaponRenderer;
-    [HideInInspector]
-    public Animator weaponAnimator;
+    [SerializeField] private GameObject playerSprite;
+    private SpriteRenderer playerRenderer;
+    public Animator playerAnimator {get; private set;}
+    public GameObject weaponSprite {get; private set;}
+    private SpriteRenderer weaponRenderer;
+    public Animator weaponAnimator {get; private set;}
 
     // health
-    [Header("Health")]
-    public float maxHealth = 1000.0f;
-    [HideInInspector]
-    public float health;
+    [field: Header("Health")]
+    [field: SerializeField] public float maxHealth {get; private set;} = 1000.0f;
+    [HideInInspector] public float health;
 
     // stamina
-    [Header("Stamina")]
-    public float maxStamina = 100.0f;
-    public float staminaGainPerSecond = 10.0f;
-    [HideInInspector]
-    public float stamina;
+    [field: Header("Stamina")]
+    [field: SerializeField] public float maxStamina {get; private set;} = 100.0f;
+    [field: SerializeField] public float staminaGainPerSecond {get; private set;} = 10.0f;
+    [HideInInspector] public float stamina;
 
     // health and stamina bar
-    [Header("UI")]
-    public GameObject healthBarObject;
-    public GameObject staminaBarObject;
+    [field: Header("UI")]
+    [field: SerializeField] public GameObject healthBarObject {get; private set;}
+    [field: SerializeField] public GameObject staminaBarObject {get; private set;}
     private Bar healthBar;
     private Bar staminaBar;
 
     // movement
-    [Header("Movement")]
-    public float walkSpeed = 5.0f;
-    public float sprintSpeed = 10.0f;
-    public float staminaDrainPerSecond = 1.0f;
-    [HideInInspector]
-    public KeyCode sprintKey = KeyCode.LeftShift;
+    [field: Header("Movement")]
+    [field: SerializeField] public float walkSpeed {get; private set;} = 1.0f;
+    [field: SerializeField] public float sprintSpeed {get; private set;} = 2.0f;
+    [field: SerializeField] public float staminaDrainPerSecond {get; private set;} = 1.0f;
+    public KeyCode sprintKey {get; private set;} = KeyCode.LeftShift;
 
     // dodge
-    [Header("Dodge")]
-    public float dodgeSpeed = 50.0f;
-    public float dodgeSpeedDropOffScale = 150.0f;
-    public float minDodgeSpeed = 25.0f;
-    public float dodgeStaminaCost = 20.0f;
-    [HideInInspector]
-    public Vector2 currentPos;
-    [HideInInspector]
-    public Vector2 mouseWorldPos;
-    [HideInInspector]
-    public KeyCode dodgeKey = KeyCode.Space;
+    [field: Header("Dodge")]
+    [field: SerializeField] public float dodgeSpeed {get; private set;} = 15.0f;
+    [field: SerializeField] public float dodgeSpeedDropOffScale {get; private set;} = 100.0f;
+    [field: SerializeField] public float minDodgeSpeed {get; private set;} = 5.0f;
+    [field: SerializeField] public float dodgeStaminaCost {get; private set;} = 20.0f;
+    public Vector2 currentPos {get; private set;}
+    public Vector2 mouseWorldPos {get; private set;}
+    public KeyCode dodgeKey {get; private set;} = KeyCode.Space;
 
     void Awake()
     {

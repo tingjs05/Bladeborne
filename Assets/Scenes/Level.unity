@@ -275,36 +275,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  input: {x: 0, y: 0}
   weapon: {fileID: 1944933101}
-  mouseDirection: {x: 0, y: 0}
-  isSheathed: 0
-  sheathKey: 113
-  attackKey: 323
   playerSprite: {fileID: 1851182753}
-  playerRenderer: {fileID: 0}
-  playerAnimator: {fileID: 0}
-  weaponSprite: {fileID: 0}
-  weaponRenderer: {fileID: 0}
-  weaponAnimator: {fileID: 0}
-  maxHealth: 1000
+  <maxHealth>k__BackingField: 1000
   health: 1000
-  maxStamina: 100
-  staminaGainPerSecond: 10
+  <maxStamina>k__BackingField: 100
+  <staminaGainPerSecond>k__BackingField: 10
   stamina: 100
-  healthBarObject: {fileID: 1923683102}
-  staminaBarObject: {fileID: 634559996}
-  walkSpeed: 1
-  sprintSpeed: 2
-  staminaDrainPerSecond: 1
-  sprintKey: 304
-  dodgeSpeed: 15
-  dodgeSpeedDropOffScale: 100
-  minDodgeSpeed: 5
-  dodgeStaminaCost: 20
-  currentPos: {x: 0, y: 0}
-  mouseWorldPos: {x: 0, y: 0}
-  dodgeKey: 32
+  <healthBarObject>k__BackingField: {fileID: 1923683102}
+  <staminaBarObject>k__BackingField: {fileID: 634559996}
+  <walkSpeed>k__BackingField: 1
+  <sprintSpeed>k__BackingField: 2
+  <staminaDrainPerSecond>k__BackingField: 1
+  <dodgeSpeed>k__BackingField: 15
+  <dodgeSpeedDropOffScale>k__BackingField: 100
+  <minDodgeSpeed>k__BackingField: 5
+  <dodgeStaminaCost>k__BackingField: 20
 --- !u!61 &241025802
 BoxCollider2D:
   m_ObjectHideFlags: 0
