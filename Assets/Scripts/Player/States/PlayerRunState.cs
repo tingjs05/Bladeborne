@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerRunState : PlayerBaseState
 {
-    private float staminaSecondCount = 0.0f;
     private bool sheathedToRun = false;
 
     public override void OnEnter(PlayerController player)
@@ -34,12 +33,7 @@ public class PlayerRunState : PlayerBaseState
             player.rb.velocity = player.input * player.sprintSpeed;
 
             // reduce stamina when sprinting
-            staminaSecondCount += Time.deltaTime;
-            if (staminaSecondCount >= player.staminaDrainPerSecond)
-            {
-                player.stamina -= 1;
-                staminaSecondCount = 0.0f;
-            }
+            player.stamina -= player.staminaDrainPerSecond * Time.deltaTime;
         }
         // walk if cannot sprint but still want to move
         else if (player.input != new Vector2(0, 0))

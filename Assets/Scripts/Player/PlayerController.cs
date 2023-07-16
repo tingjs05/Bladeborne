@@ -9,19 +9,19 @@ public class PlayerController : MonoBehaviour
 
     // states
     [HideInInspector]
-    public PlayerIdleState idle {get; set;}
+    public PlayerIdleState idle {get; private set;}
     [HideInInspector]
-    public PlayerWalkState walk {get; set;}
+    public PlayerWalkState walk {get; private set;}
     [HideInInspector]
-    public PlayerRunState run {get; set;}
+    public PlayerRunState run {get; private set;}
     [HideInInspector]
-    public PlayerDodgeState dodge {get; set;}
+    public PlayerDodgeState dodge {get; private set;}
     [HideInInspector]
-    public PlayerFirstAttackState attack1 {get; set;}
+    public PlayerFirstAttackState attack1 {get; private set;}
     [HideInInspector]
-    public PlayerSecondAttackState attack2 {get; set;}
+    public PlayerSecondAttackState attack2 {get; private set;}
     [HideInInspector]
-    public PlayerThirdAttackState attack3 {get; set;}
+    public PlayerThirdAttackState attack3 {get; private set;}
 
     // get components
     [HideInInspector]
