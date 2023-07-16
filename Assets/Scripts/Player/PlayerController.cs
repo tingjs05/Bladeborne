@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour
     // inputs by the player to update every frame
     public Vector2 input {get; private set;}
 
+    // positions of player and mouse
+    public Vector2 currentPos {get; private set;}
+    public Vector2 mouseWorldPos {get; private set;}
+
     // weapon and attacks
     [Header("Weapon")]
     [SerializeField] private GameObject weapon;
@@ -33,11 +37,11 @@ public class PlayerController : MonoBehaviour
     // sprite
     [Header("Sprite")]
     [SerializeField] private GameObject playerSprite;
-    private SpriteRenderer playerRenderer;
-    public Animator playerAnimator {get; private set;}
     public GameObject weaponSprite {get; private set;}
-    private SpriteRenderer weaponRenderer;
+    public Animator playerAnimator {get; private set;}
     public Animator weaponAnimator {get; private set;}
+    private SpriteRenderer playerRenderer;
+    private SpriteRenderer weaponRenderer;
 
     // health
     [field: Header("Health")]
@@ -70,8 +74,6 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public float dodgeSpeedDropOffScale {get; private set;} = 100.0f;
     [field: SerializeField] public float minDodgeSpeed {get; private set;} = 5.0f;
     [field: SerializeField] public float dodgeStaminaCost {get; private set;} = 20.0f;
-    public Vector2 currentPos {get; private set;}
-    public Vector2 mouseWorldPos {get; private set;}
     public KeyCode dodgeKey {get; private set;} = KeyCode.Space;
 
     void Awake()
