@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerWalkState : PlayerBaseState
 {
-    private float minSprintStamina = 10.0f;
+    private float minSprintStamina = 20.0f;
 
     public override void OnEnter(PlayerController player)
     {

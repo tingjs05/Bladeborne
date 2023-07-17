@@ -286,7 +286,7 @@ MonoBehaviour:
   <staminaBarObject>k__BackingField: {fileID: 634559996}
   <walkSpeed>k__BackingField: 1
   <sprintSpeed>k__BackingField: 2
-  <staminaDrainPerSecond>k__BackingField: 1
+  <staminaDrainPerSecond>k__BackingField: 10
   <dodgeSpeed>k__BackingField: 15
   <dodgeSpeedDropOffScale>k__BackingField: 100
   <minDodgeSpeed>k__BackingField: 5
