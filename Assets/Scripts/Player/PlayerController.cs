@@ -24,40 +24,7 @@ public class PlayerController : MonoBehaviour
 
     // positions of player and mouse
     public Vector2 currentPos {get; private set;}
-    public Vector2 mouseWorldPos {get; private set;}
-
-    // weapon and attacks
-    [Header("Weapon")]
-    [SerializeField] private GameObject weapon;
-    public Vector2 mouseDirection {get; private set;}
-    public bool isSheathed {get; private set;} = false;
-
-    // sprite
-    [Header("Sprite")]
-    [SerializeField] private GameObject playerSprite;
-    public GameObject weaponSprite {get; private set;}
-    public Animator playerAnimator {get; private set;}
-    public Animator weaponAnimator {get; private set;}
-    private SpriteRenderer playerRenderer;
-    private SpriteRenderer weaponRenderer;
-
-    // health
-    [field: Header("Health")]
-    [field: SerializeField] public float maxHealth {get; private set;} = 1000.0f;
-    [HideInInspector] public float health;
-
-    // stamina
-    [field: Header("Stamina")]
-    [field: SerializeField] public float maxStamina {get; private set;} = 100.0f;
-    [field: SerializeField] public float staminaGainPerSecond {get; private set;} = 10.0f;
-    [HideInInspector] public float stamina;
-
-    // health and stamina bar
-    [field: Header("UI")]
-    [field: SerializeField] public GameObject healthBarObject {get; private set;}
-    [field: SerializeField] public GameObject staminaBarObject {get; private set;}
-    private Bar healthBar;
-    private Bar staminaBar;
+    public Vector2 mouseWorldPos {get; private set;}    
 
     // movement
     [field: Header("Movement")]
@@ -72,11 +39,66 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public float minDodgeSpeed {get; private set;} = 5.0f;
     [field: SerializeField] public float dodgeStaminaCost {get; private set;} = 20.0f;
 
+    // weapon and attacks
+    [Header("Weapon")]
+    [SerializeField] private GameObject weapon;
+    public Vector2 mouseDirection {get; private set;}
+    public bool isSheathed {get; private set;} = false;
+
+    // health
+    [field: Header("Health")]
+    [field: SerializeField] public float maxHealth {get; private set;} = 1000.0f;
+    // clamp health to keep value within range
+    public float health 
+    {
+        get
+        {
+            return health;
+        } 
+        set
+        {
+            health = Mathf.Clamp(value, 0f, maxHealth);
+        }
+    }
+
+    // stamina
+    [field: Header("Stamina")]
+    [field: SerializeField] public float maxStamina {get; private set;} = 100.0f;
+    [field: SerializeField] public float staminaGainPerSecond {get; private set;} = 10.0f;
+    // clamp stamina to keep value within range
+    public float stamina
+    {
+        get
+        {
+            return stamina;
+        } 
+        set
+        {
+            stamina = Mathf.Clamp(value, 0f, maxStamina);
+        }
+    }
+
+    // health and stamina bar
+    [field: Header("UI")]
+    [field: SerializeField] public GameObject healthBarObject {get; private set;}
+    [field: SerializeField] public GameObject staminaBarObject {get; private set;}
+    private Bar healthBar;
+    private Bar staminaBar;
+
+    // sprite
+    [Header("Sprite")]
+    [SerializeField] private GameObject playerSprite;
+    public GameObject weaponSprite {get; private set;}
+    public Animator playerAnimator {get; private set;}
+    public Animator weaponAnimator {get; private set;}
+    private SpriteRenderer playerRenderer;
+    private SpriteRenderer weaponRenderer;
+
     // controls
-    public KeyCode sheathKey {get; private set;} = KeyCode.Q;
-    public KeyCode attackKey {get; private set;} = KeyCode.Mouse0;
     public KeyCode sprintKey {get; private set;} = KeyCode.LeftShift;
     public KeyCode dodgeKey {get; private set;} = KeyCode.Space;
+    public KeyCode sheathKey {get; private set;} = KeyCode.Q;
+    public KeyCode attackKey {get; private set;} = KeyCode.Mouse0;
 
     void Awake()
     {
