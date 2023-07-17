@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 13ae1bf588150bf4b8a901a41586b2ae
+guid: 29c4b4a2ee2068f4b8aba91361782ee1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -143,13 +143,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tileset-grassland-props_0
+      name: tileset-grassland-paths-cross_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 316
-        width: 70
-        height: 88
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,20 +157,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55747ecd0ccafe64285c4eb378a8d644
-      internalID: 891767892
+      spriteID: b243a90c3af94ae4fb08fdfe815fbea9
+      internalID: 894989407
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tileset-grassland-props_1
+      name: tileset-grassland-paths-cross_1
       rect:
         serializedVersion: 2
-        x: 88
-        y: 382
-        width: 19
-        height: 24
+        x: 32
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,20 +178,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 96ef562c5a6d20b4b9f88c18e3e5e4f6
-      internalID: 1029984401
+      spriteID: 3496534a668f5844e815bb12d0999738
+      internalID: -1105736406
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tileset-grassland-props_2
+      name: tileset-grassland-paths-cross_2
       rect:
         serializedVersion: 2
-        x: 129
-        y: 384
-        width: 31
-        height: 19
+        x: 64
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,20 +199,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c52d7f38789bf054ca263de4e715b583
-      internalID: -769286951
+      spriteID: 49912c8ab15768840ac395ff7f07d928
+      internalID: -1310379808
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tileset-grassland-props_3
+      name: tileset-grassland-paths-cross_3
       rect:
         serializedVersion: 2
-        x: 89
-        y: 319
-        width: 24
-        height: 51
+        x: 96
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -220,50 +220,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c76456fdd8735d449469cb094adab84
-      internalID: -1862141208
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tileset-grassland-props_4
-      rect:
-        serializedVersion: 2
-        x: 139
-        y: 350
-        width: 8
-        height: 19
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 432dbe73a831d404c9c88b2f2b526873
-      internalID: -1621218064
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tileset-grassland-props_5
-      rect:
-        serializedVersion: 2
-        x: 136
-        y: 316
-        width: 30
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 27bff111463f84740b8825e5bb8433c4
-      internalID: -876670059
+      spriteID: 83a97c940725a3e48977323414a7af05
+      internalID: 435658641
       vertices: []
       indices: 
       edges: []
@@ -279,12 +237,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      tileset-grassland-props_0: 891767892
-      tileset-grassland-props_1: 1029984401
-      tileset-grassland-props_2: -769286951
-      tileset-grassland-props_3: -1862141208
-      tileset-grassland-props_4: -1621218064
-      tileset-grassland-props_5: -876670059
+      tileset-grassland-paths-cross_0: 894989407
+      tileset-grassland-paths-cross_1: -1105736406
+      tileset-grassland-paths-cross_2: -1310379808
+      tileset-grassland-paths-cross_3: 435658641
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
