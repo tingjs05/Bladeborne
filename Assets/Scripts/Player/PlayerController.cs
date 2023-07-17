@@ -31,8 +31,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject weapon;
     public Vector2 mouseDirection {get; private set;}
     public bool isSheathed {get; private set;} = false;
-    public KeyCode sheathKey {get; private set;} = KeyCode.Q;
-    public KeyCode attackKey {get; private set;} = KeyCode.Mouse0;
 
     // sprite
     [Header("Sprite")]
@@ -66,7 +64,6 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public float walkSpeed {get; private set;} = 1.0f;
     [field: SerializeField] public float sprintSpeed {get; private set;} = 2.0f;
     [field: SerializeField] public float staminaDrainPerSecond {get; private set;} = 1.0f;
-    public KeyCode sprintKey {get; private set;} = KeyCode.LeftShift;
 
     // dodge
     [field: Header("Dodge")]
@@ -74,6 +71,11 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public float dodgeSpeedDropOffScale {get; private set;} = 100.0f;
     [field: SerializeField] public float minDodgeSpeed {get; private set;} = 5.0f;
     [field: SerializeField] public float dodgeStaminaCost {get; private set;} = 20.0f;
+
+    // controls
+    public KeyCode sheathKey {get; private set;} = KeyCode.Q;
+    public KeyCode attackKey {get; private set;} = KeyCode.Mouse0;
+    public KeyCode sprintKey {get; private set;} = KeyCode.LeftShift;
     public KeyCode dodgeKey {get; private set;} = KeyCode.Space;
 
     void Awake()
@@ -118,7 +120,7 @@ public class PlayerController : MonoBehaviour
         staminaBar.setMax(maxStamina);
 
         // set input to no input
-        input = new Vector2(0, 0);
+        input = Vector2.zero;
 
         // set default state
         state = idle;
@@ -173,7 +175,7 @@ public class PlayerController : MonoBehaviour
             // flip weapon as well if sheathed
             if (isSheathed)
             {
-                weapon.transform.localScale = new Vector3(1, 1, 1);
+                weapon.transform.localScale = Vector3.one;
             }
         }
     }
@@ -213,7 +215,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (mouseDirection.x > 0)
         {
-            weapon.transform.localScale = new Vector3(1, 1, 1);
+            weapon.transform.localScale = Vector3.one;
             playerRenderer.flipX = false;
         }
 
@@ -243,7 +245,7 @@ public class PlayerController : MonoBehaviour
             weaponSprite.transform.Translate(new Vector3(0.1f, 0f, 0f));
 
             // reset weapon flipX if weapon was flipped when sheathed
-            weapon.transform.localScale = new Vector3(1, 1, 1);
+            weapon.transform.localScale = Vector3.one;
 
             // make weapon appear in front of player
             weaponRenderer.sortingOrder = 1;
@@ -257,8 +259,8 @@ public class PlayerController : MonoBehaviour
             weaponAnimator.Play("Weapon_Sheath");
 
             // reset weapon rotation before sheathing weapon
-            weapon.transform.right = new Vector2(0, 0);
-            weapon.transform.localScale = new Vector3(1, 1, 1);
+            weapon.transform.right = Vector2.zero;
+            weapon.transform.localScale = Vector3.one;
 
             // adjust position of weapon
             weaponSprite.transform.Translate(new Vector3(-0.1f, 0f, 0f));

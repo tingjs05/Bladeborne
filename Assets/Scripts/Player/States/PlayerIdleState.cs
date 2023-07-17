@@ -5,7 +5,7 @@ public class PlayerIdleState : PlayerBaseState
     public override void OnEnter(PlayerController player)
     {
         // set velocity to 0 when in idle state
-        player.rb.velocity = new Vector2(0, 0);
+        player.rb.velocity = Vector2.zero;
 
         // play idle animation
         player.playerAnimator.Play("Player_Idle");
@@ -53,7 +53,7 @@ public class PlayerIdleState : PlayerBaseState
             player.switchState(player.dodge);
         }
         // check for movement
-        else if (player.input != new Vector2(0, 0))
+        else if (player.input != Vector2.zero)
         {
             // if there are inputs, switch state to walk
             player.switchState(player.walk);

@@ -21,7 +21,7 @@ public class PlayerSecondAttackState : PlayerBaseState
         // update input
         player.updateInput(false);
         // move player if there is input
-        if (player.input != new Vector2(0, 0))
+        if (player.input != Vector2.zero)
         {
             // move player
             player.rb.velocity = player.input * player.walkSpeed;

@@ -57,7 +57,7 @@ public class PlayerWalkState : PlayerBaseState
             player.switchState(player.run);
         }
         // continue walking if still want to walk
-        else if (player.input != new Vector2(0, 0))
+        else if (player.input != Vector2.zero)
         {
             // move player
             player.rb.velocity = player.input * player.walkSpeed;

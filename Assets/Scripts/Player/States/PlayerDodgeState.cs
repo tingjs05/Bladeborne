@@ -25,7 +25,7 @@ public class PlayerDodgeState : PlayerBaseState
         player.updateMousePos();
 
         // follow mouse direction
-        if (player.input == new Vector2(0, 0))
+        if (player.input == Vector2.zero)
         {
             // get direction of mouse from player
             dodgeDirection = -(player.currentPos - player.mouseWorldPos).normalized;
