@@ -29,17 +29,17 @@ public class PlayerRunState : PlayerBaseState
         }
 
         // prioritize checking for dodge
-        if (Input.GetKeyDown(player.dodgeKey) && player.stamina >= player.dodgeStaminaCost)
+        if (Input.GetKeyDown(player.dodgeKey) && player.Stamina >= player.dodgeStaminaCost)
         {
             player.switchState(player.dodge);
         }
         // continue sprinting if sprintKey is pressed and stamina is not 0 and there is movement input
-        else if (Input.GetKey(player.sprintKey) && player.stamina >= 0 && player.input != Vector2.zero)
+        else if (Input.GetKey(player.sprintKey) && player.Stamina >= 0 && player.input != Vector2.zero)
         {
             player.rb.velocity = player.input * player.sprintSpeed;
 
             // reduce stamina when sprinting
-            player.stamina -= player.staminaDrainPerSecond * Time.deltaTime;
+            player.Stamina -= player.staminaDrainPerSecond * Time.deltaTime;
         }
         // walk if cannot sprint but still want to move
         else if (player.input != Vector2.zero)

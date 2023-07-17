@@ -23,10 +23,10 @@ public class PlayerThirdAttackState : PlayerBaseState
     public override void OnUpdate(PlayerController player)
     {
         // only increase stamina when below max
-        if (player.stamina < player.maxStamina)
+        if (player.Stamina < player.maxStamina)
         {
             // increase stamina every second
-            player.stamina += player.staminaGainPerSecond * Time.deltaTime;
+            player.Stamina += player.staminaGainPerSecond * Time.deltaTime;
         }
 
         if (durationInState < maxStateDuration)

@@ -40,7 +40,7 @@ public class PlayerDodgeState : PlayerBaseState
         currentDodgeSpeed = player.dodgeSpeed;
 
         // reduce stamina
-        player.stamina -= player.dodgeStaminaCost;
+        player.Stamina -= player.dodgeStaminaCost;
     }
 
     public override void OnUpdate(PlayerController player)

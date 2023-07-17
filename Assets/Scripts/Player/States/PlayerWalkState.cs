@@ -40,19 +40,19 @@ public class PlayerWalkState : PlayerBaseState
         }
 
         // only increase stamina when below max
-        if (player.stamina < player.maxStamina)
+        if (player.Stamina < player.maxStamina)
         {
             // increase stamina every second
-            player.stamina += player.staminaGainPerSecond * Time.deltaTime;
+            player.Stamina += player.staminaGainPerSecond * Time.deltaTime;
         }
 
         // prioritize checking for dodge
-        if (Input.GetKeyDown(player.dodgeKey) && player.stamina >= player.dodgeStaminaCost)
+        if (Input.GetKeyDown(player.dodgeKey) && player.Stamina >= player.dodgeStaminaCost)
         {
             player.switchState(player.dodge);
         }
         // sprint if sprintKey is pressed and required stamina is met
-        else if (Input.GetKey(player.sprintKey) && player.stamina >= minSprintStamina)
+        else if (Input.GetKey(player.sprintKey) && player.Stamina >= minSprintStamina)
         {
             player.switchState(player.run);
         }

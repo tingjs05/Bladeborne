@@ -48,8 +48,9 @@ public class PlayerController : MonoBehaviour
     // health
     [field: Header("Health")]
     [field: SerializeField] public float maxHealth {get; private set;} = 1000.0f;
+    private float health;
     // clamp health to keep value within range
-    public float health 
+    public float Health
     {
         get
         {
@@ -65,8 +66,9 @@ public class PlayerController : MonoBehaviour
     [field: Header("Stamina")]
     [field: SerializeField] public float maxStamina {get; private set;} = 100.0f;
     [field: SerializeField] public float staminaGainPerSecond {get; private set;} = 10.0f;
+    private float stamina;
     // clamp stamina to keep value within range
-    public float stamina
+    public float Stamina
     {
         get
         {
@@ -134,8 +136,8 @@ public class PlayerController : MonoBehaviour
         staminaBar = staminaBarObject.GetComponent<Bar>();
 
         // set health and stamina to max
-        health = maxHealth;
-        stamina = maxStamina;
+        Health = maxHealth;
+        Stamina = maxStamina;
 
         // set health and stamina bar
         healthBar.setMax(maxHealth);
@@ -156,8 +158,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // update health and stamina bar
-        healthBar.setValue(health);
-        staminaBar.setValue(stamina);
+        healthBar.setValue(Health);
+        staminaBar.setValue(Stamina);
 
         // update state
         state.OnUpdate(this);

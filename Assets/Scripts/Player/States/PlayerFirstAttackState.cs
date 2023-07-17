@@ -43,10 +43,10 @@ public class PlayerFirstAttackState : PlayerBaseState
         }
 
         // only increase stamina when below max
-        if (player.stamina < player.maxStamina)
+        if (player.Stamina < player.maxStamina)
         {
             // increase stamina every second
-            player.stamina += player.staminaGainPerSecond * Time.deltaTime;
+            player.Stamina += player.staminaGainPerSecond * Time.deltaTime;
         }
 
         // check for chain attack
