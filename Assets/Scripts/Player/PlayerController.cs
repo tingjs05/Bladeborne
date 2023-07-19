@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public PlayerThirdAttackState attack3 {get; private set;}
 
     // get components
-    [HideInInspector] public Rigidbody2D rb;
+    public Rigidbody2D rb {get; private set;}
 
     // inputs by the player to update every frame
     public Vector2 input {get; private set;}
@@ -39,17 +39,29 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public float minDodgeSpeed {get; private set;} = 5.0f;
     [field: SerializeField] public float dodgeStaminaCost {get; private set;} = 20.0f;
 
-    // weapon and attacks
-    [Header("Weapon")]
-    [SerializeField] private GameObject weapon;
+    // weapon
+    [field: Header("Weapon")]
+    [field: SerializeField] public GameObject weapon {get; private set;}
     public Vector2 mouseDirection {get; private set;}
     public bool isSheathed {get; private set;} = false;
+
+    // attacks
+    [field: Header("Attacks")]
+    // attack 1
+    [field: SerializeField] public float attackRange1 {get; private set;} = 0.5f;
+    [field: SerializeField] public float attackDamage1 {get; private set;} = 30.0f;
+    // attack 2
+    [field: SerializeField] public float attackRange2 {get; private set;} = 0.6f;
+    [field: SerializeField] public float attackDamage2 {get; private set;} = 15.0f;
+    // attack 3
+    [field: SerializeField] public Vector2 attackRange3 {get; private set;} = new Vector2(2.5f, 1.0f);
+    [field: SerializeField] public float attackDamage3 {get; private set;} = 45.0f;
 
     // health
     [field: Header("Health")]
     [field: SerializeField] public float maxHealth {get; private set;} = 1000.0f;
     private float health;
-    // clamp health to keep value within range
+    // create a public Health reference for health, and clamp health to keep value within range
     public float Health
     {
         get
@@ -67,7 +79,7 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public float maxStamina {get; private set;} = 100.0f;
     [field: SerializeField] public float staminaGainPerSecond {get; private set;} = 10.0f;
     private float stamina;
-    // clamp stamina to keep value within range
+    // create a public Stamina reference for stamina, and clamp stamina to keep value within range
     public float Stamina
     {
         get

@@ -2065,7 +2065,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d84bf4e208be8a4dac7d05daa09c306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
   <walkSpeed>k__BackingField: 1
   <sprintSpeed>k__BackingField: 2
   <staminaDrainPerSecond>k__BackingField: 1
@@ -2073,7 +2072,13 @@ MonoBehaviour:
   <dodgeSpeedDropOffScale>k__BackingField: 100
   <minDodgeSpeed>k__BackingField: 5
   <dodgeStaminaCost>k__BackingField: 20
-  weapon: {fileID: 1944933101}
+  <weapon>k__BackingField: {fileID: 1944933101}
+  <attackRange1>k__BackingField: 0.5
+  <attackDamage1>k__BackingField: 30
+  <attackRange2>k__BackingField: 0.6
+  <attackDamage2>k__BackingField: 15
+  <attackRange3>k__BackingField: {x: 2.5, y: 1}
+  <attackDamage3>k__BackingField: 45
   <maxHealth>k__BackingField: 1000
   <maxStamina>k__BackingField: 100
   <staminaGainPerSecond>k__BackingField: 10

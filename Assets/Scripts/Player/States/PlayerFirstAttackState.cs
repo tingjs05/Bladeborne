@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class PlayerFirstAttackState : PlayerBaseState
 {
-    private float maxStateDuration = 0.4f;
+    private Vector2 attackOffset = new Vector2(0.5f, 0.4f);
+    private float stateDuration = 0.4f;
     private float durationInState;
+    private bool bufferedAttack = false;
     private bool backToIdle = false;
     private bool moving = false;
 
@@ -17,6 +19,22 @@ public class PlayerFirstAttackState : PlayerBaseState
 
         // set the duration in this state to 0
         durationInState = 0f;
+
+        // get attack point, weapon pos + attack offset and multiply by direction of attack
+        // Vector2 attackPoint = player.mouseDirection * (attackOffset * player.weapon.transform.position);
+
+        // // detect enemies in range of attack
+        // Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint, player.attackRange1);
+
+        // foreach (Collider2D enemy in enemies)
+        // {
+        //     Debug.Log(enemy.name);
+        //     // damage the enemy if hit
+        //     if (enemy.gameObject.tag == "Enemy")
+        //     {
+        //         Debug.Log("Attack 1 hit an Enemy!");
+        //     }
+        // }
     }
 
     public override void OnUpdate(PlayerController player)
@@ -50,15 +68,24 @@ public class PlayerFirstAttackState : PlayerBaseState
         }
 
         // check for chain attack
-        if (Input.GetKeyDown(player.attackKey) && durationInState < maxStateDuration)
+        if (Input.GetKeyDown(player.attackKey) && durationInState < stateDuration)
         {
-            player.switchState(player.attack2);
+            // allow players to buffer their next attack
+            bufferedAttack = true;
         }
         // idle in state
-        else if (durationInState < maxStateDuration)
+        else if (durationInState < stateDuration)
         {
             // increment duration in state
             durationInState += Time.deltaTime;
+        }
+        // change to next attack when at max state duration if player clicked during state duration
+        else if (bufferedAttack && durationInState >= stateDuration)
+        {
+            // reset buffered attack boolean
+            bufferedAttack = false;
+            // switch to next attack state
+            player.switchState(player.attack2);
         }
         // if at max state duration, switch back to idle
         else
