@@ -4,9 +4,11 @@ public class PlayerFirstAttackState : PlayerBaseState
 {
     private float stateDuration = 0.4f;
     private float durationInState;
+
     private bool bufferedAttack = false;
     private bool backToIdle = false;
     private bool moving = false;
+
     private Vector2[] attackRange = new[]{
         new Vector2(0f, -0.35f),
         new Vector2(1.2f, -0.35f),

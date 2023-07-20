@@ -4,6 +4,8 @@ public class PlayerThirdAttackState : PlayerBaseState
 {
     private float stateDuration = 0.7f;
     private float durationInState;
+    private float attackDelay = 0.3f;
+
     private Vector2[] attackRange = new[]{
         new Vector2(-0.1f, -0.35f),
         new Vector2(1.75f, -0.15f),
@@ -27,13 +29,17 @@ public class PlayerThirdAttackState : PlayerBaseState
 
         // set attack range
         player.setAttackRange(attackRange);
-
-        // activate attack
-        player.attackRange.SetActive(true);
     }
 
     public override void OnUpdate(PlayerController player)
     {
+        // activate attack after delay
+        if (durationInState >= attackDelay)
+        {
+            // activate attack
+            player.attackRange.SetActive(true);
+        }
+
         // only increase stamina when below max
         if (player.Stamina < player.maxStamina)
         {
