@@ -2,9 +2,14 @@ using UnityEngine;
 
 public class PlayerThirdAttackState : PlayerBaseState
 {
-    private Vector2 attackOffset = new Vector2(0.8f, 0.4f);
     private float stateDuration = 0.7f;
     private float durationInState;
+    private Vector2[] attackRange = new[]{
+        new Vector2(-0.1f, -0.35f),
+        new Vector2(1.75f, -0.15f),
+        new Vector2(1.75f, 0.2f),
+        new Vector2(-0.1f, 0.35f)
+    };
 
     public override void OnEnter(PlayerController player)
     {
@@ -20,21 +25,11 @@ public class PlayerThirdAttackState : PlayerBaseState
         // adjust weapon position
         player.weaponSprite.transform.Translate(new Vector3(0f, -0.05f, 0f));
 
-        // get attack point, weapon pos + attack offset and multiply by direction of attack
-        // Vector2 attackPoint = player.mouseDirection * (attackOffset * player.weapon.transform.position);
+        // set attack range
+        player.setAttackRange(attackRange);
 
-        // // detect enemies in range of attack
-        // Collider2D[] enemies = Physics2D.OverlapBoxAll(attackPoint, player.attackRange3, 0f);
-
-        // foreach (Collider2D enemy in enemies)
-        // {
-        //     Debug.Log(enemy.name);
-        //     // damage the enemy if hit
-        //     if (enemy.gameObject.tag == "Enemy")
-        //     {
-        //         Debug.Log("Attack 3 hit an Enemy!");
-        //     }
-        // }
+        // activate attack
+        player.attackRange.SetActive(true);
     }
 
     public override void OnUpdate(PlayerController player)
@@ -63,6 +58,9 @@ public class PlayerThirdAttackState : PlayerBaseState
 
     public override void OnExit(PlayerController player)
     {
+        // deactivate attack
+        player.attackRange.SetActive(false);
+
         // reset adjusted weapon position
         player.weaponSprite.transform.Translate(new Vector3(0f, 0.05f, 0f));
 

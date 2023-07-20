@@ -47,15 +47,11 @@ public class PlayerController : MonoBehaviour
 
     // attacks
     [field: Header("Attacks")]
-    // attack 1
-    [field: SerializeField] public float attackRange1 {get; private set;} = 0.5f;
     [field: SerializeField] public float attackDamage1 {get; private set;} = 30.0f;
-    // attack 2
-    [field: SerializeField] public float attackRange2 {get; private set;} = 0.6f;
     [field: SerializeField] public float attackDamage2 {get; private set;} = 15.0f;
-    // attack 3
-    [field: SerializeField] public Vector2 attackRange3 {get; private set;} = new Vector2(2.5f, 1.0f);
     [field: SerializeField] public float attackDamage3 {get; private set;} = 45.0f;
+    public GameObject attackRange {get; private set;}
+    public PolygonCollider2D attackCollider {get; private set;}
 
     // health
     [field: Header("Health")]
@@ -129,8 +125,14 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // get components
+        // get player rigidbody component
         rb = GetComponent<Rigidbody2D>();
+
+        // get attack range
+        attackRange = weapon.transform.GetChild(1).gameObject;
+
+        // get attack collider component
+        attackCollider = attackRange.GetComponent<PolygonCollider2D>();
 
         // get weapon sprite object from weapon object
         weaponSprite = weapon.transform.GetChild(0).gameObject;
@@ -304,6 +306,12 @@ public class PlayerController : MonoBehaviour
             // make weapon appear behind the player
             weaponRenderer.sortingOrder = -1;
         }
+    }
+
+    // set attack range
+    public void setAttackRange(Vector2[] path)
+    {
+        attackCollider.SetPath(0, path);
     }
 
     // switch state method

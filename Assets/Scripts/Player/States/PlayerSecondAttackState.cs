@@ -2,12 +2,17 @@ using UnityEngine;
 
 public class PlayerSecondAttackState : PlayerBaseState
 {
-    private Vector2 attackOffset = new Vector2(0.6f, 0.55f);
     private float stateDuration = 0.4f;
     private float durationInState;
     private bool bufferedAttack = false;
     private bool backToIdle = false;
     private bool moving = false;
+    private Vector2[] attackRange = new[]{
+        new Vector2(0.2f, -0.3f),
+        new Vector2(1.35f, -0.3f),
+        new Vector2(1.35f, 0.6f),
+        new Vector2(-0.3f, 1.0f)
+    };
 
     public override void OnEnter(PlayerController player)
     {
@@ -17,21 +22,11 @@ public class PlayerSecondAttackState : PlayerBaseState
         // set the duration in this state to 0
         durationInState = 0f;
 
-        // get attack point, weapon pos + attack offset and multiply by direction of attack
-        // Vector2 attackPoint =  player.mouseDirection * (attackOffset * player.weapon.transform.position);
+        // set attack range
+        player.setAttackRange(attackRange);
 
-        // // detect enemies in range of attack
-        // Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint, player.attackRange2);
-
-        // foreach (Collider2D enemy in enemies)
-        // {
-        //     Debug.Log(enemy.name);
-        //     // damage the enemy if hit
-        //     if (enemy.gameObject.tag == "Enemy")
-        //     {
-        //         Debug.Log("Attack 2 hit an Enemy!");
-        //     }
-        // }
+        // activate attack
+        player.attackRange.SetActive(true);
     }
 
     public override void OnUpdate(PlayerController player)
@@ -94,6 +89,9 @@ public class PlayerSecondAttackState : PlayerBaseState
 
     public override void OnExit(PlayerController player)
     {
+        // deactivate attack
+        player.attackRange.SetActive(false);
+
         // switch weapon animation back to idle if player is returning to idle state
         if (backToIdle)
         {
