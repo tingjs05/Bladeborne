@@ -34,8 +34,8 @@ public class PlayerController : MonoBehaviour
 
     // dodge
     [field: Header("Dodge")]
-    [field: SerializeField] public float dodgeSpeed {get; private set;} = 20.0f;
-    [field: SerializeField] public float dodgeSpeedDropOffScale {get; private set;} = 100.0f;
+    [field: SerializeField] public float dodgeSpeed {get; private set;} = 15.0f;
+    [field: SerializeField] public float dodgeSpeedDropOffScale {get; private set;} = 50.0f;
     [field: SerializeField] public float minDodgeSpeed {get; private set;} = 5.0f;
     [field: SerializeField] public float dodgeStaminaCost {get; private set;} = 20.0f;
 

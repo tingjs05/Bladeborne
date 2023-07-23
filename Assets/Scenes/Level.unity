@@ -2068,8 +2068,8 @@ MonoBehaviour:
   <walkSpeed>k__BackingField: 1
   <sprintSpeed>k__BackingField: 2
   <staminaDrainPerSecond>k__BackingField: 1
-  <dodgeSpeed>k__BackingField: 20
-  <dodgeSpeedDropOffScale>k__BackingField: 100
+  <dodgeSpeed>k__BackingField: 15
+  <dodgeSpeedDropOffScale>k__BackingField: 50
   <minDodgeSpeed>k__BackingField: 5
   <dodgeStaminaCost>k__BackingField: 20
   <weapon>k__BackingField: {fileID: 1944933101}
@@ -14005,7 +14005,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1259922200
 BoxCollider2D:
   m_ObjectHideFlags: 0
