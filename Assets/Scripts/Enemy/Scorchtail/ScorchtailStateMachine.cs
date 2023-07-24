@@ -14,6 +14,7 @@ public class ScorchtailStateMachine : MonoBehaviour
     public ScorchtailStunState stun {get; private set;}
     public ScorchtailRollAttackState rollAtk {get; private set;}
     public ScorchtailTailAttackState tailAtk {get; private set;}
+    public ScorchtailScratchAttackState scratchAtk {get; private set;}
 
     void Awake()
     {
@@ -24,6 +25,7 @@ public class ScorchtailStateMachine : MonoBehaviour
         stun = new ScorchtailStunState();
         rollAtk = new ScorchtailRollAttackState();
         tailAtk = new ScorchtailTailAttackState();
+        scratchAtk = new ScorchtailScratchAttackState();
     }
 
     // Start is called before the first frame update
