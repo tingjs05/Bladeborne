@@ -7,7 +7,6 @@ public class ObstacleDetector : Detector
     [SerializeField] private float detectionRange = 2.0f;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private bool showGizmos = true;
-    [SerializeField] private bool showRaycast = true;
 
     private List<Vector2> colliderPositions;
     private List<Vector2> directions = new List<Vector2>();
@@ -16,23 +15,30 @@ public class ObstacleDetector : Detector
     void Start()
     {
         // set the list contatining 8 directions
-        getDirections();
+        getEightDirections();
     }
 
     // detect surrounding obstacles using overlap circle
     public override void Detect(AIData data)
     {
-        // reset colliderPositions list
-        colliderPositions = new List<Vector2>();
+        // reset colliderPositions list to null
+        colliderPositions = null;
+
         // raycast in all 8 directions to detect obstacles
         foreach (Vector2 direction in directions)
         {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectionRange, layerMask);
 
-            // show raycast if showRaycast is true
-            if (showRaycast)
+            // show raycast if showGizmos is true
+            if (showGizmos)
             {
                 Debug.DrawRay(transform.position, direction * detectionRange, Color.red);
+            }
+
+            // create a new colliderPositions list if list is null
+            if (colliderPositions == null)
+            {
+                colliderPositions = new List<Vector2>();
             }
 
             if (hit.collider != null)
@@ -45,7 +51,7 @@ public class ObstacleDetector : Detector
         data.obstacles = colliderPositions;
     }
 
-    private void getDirections()
+    private void getEightDirections()
     {
         // array of possible point combinations
         int[] pointsArray = new[] {0, 1, -1};
@@ -62,7 +68,7 @@ public class ObstacleDetector : Detector
                 // set y coordinate
                 direction.y = pointsArray[j];
                 // add direction to directions list
-                directions.Add(direction);
+                directions.Add(direction.normalized);
             }
         }
 

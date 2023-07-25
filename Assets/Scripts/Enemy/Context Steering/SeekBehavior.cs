@@ -1,0 +1,146 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+public class SeekBehavior : SteeringBehavior
+{
+    [SerializeField] private float targetReachedThreshold = 0.5f;
+
+    [SerializeField] private bool showGizmos = true;
+
+    private List<Vector2> directions = new List<Vector2>();
+    private bool reachedLastTarget = true;
+    private Vector2 targetPositionCached;
+    private float[] interestTemp;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        // set the list contatining 8 directions
+        getEightDirections();
+    }
+
+    public override (float[] danger, float[] interest) GetSteering(float[] danger, float[] interest, AIData data)
+    {
+        // if don't have a target, stop seeking, else set a new target
+        if (reachedLastTarget)
+        {
+            if (data.targets == null || data.targets.Count <= 0)
+            {
+                data.currentTarget = Vector2.zero;
+                return (danger, interest);
+            }
+            else
+            {
+                reachedLastTarget = false;
+                // set target position
+                setTarget(data);
+            }
+        }
+        else
+        {
+            // update target position if haven't reached target
+            setTarget(data);
+        }
+
+        // cache the last position only if we still see the target (if the targets list is not empty)
+        if (data.currentTarget != Vector2.zero && data.targets != null && data.targets.Contains(data.currentTarget))
+        {
+            // cache player's position to move to player's last seen location if player is hiding behind an object
+            targetPositionCached = data.currentTarget;
+        }
+
+        // first check if we have reached the target
+        if (Vector2.Distance(transform.position, targetPositionCached) < targetReachedThreshold)
+        {
+            reachedLastTarget = true;
+            data.currentTarget = Vector2.zero;
+            return (danger, interest);
+        }
+
+        // if havent reached target, find interest direction
+        Vector2 directionToTarget = targetPositionCached - (Vector2) transform.position;
+        for (int i = 0; i < interest.Length; i++)
+        {
+            // calculate dot product of these two vectors, giving an estimate of how close is the direction to the direction to move in
+            float result = Vector2.Dot(directionToTarget.normalized, directions[i]);
+
+            // accept only directions less than 90 degrees to the target direction
+            if (result > 0)
+            {
+                float valueToPutIn = result;
+
+                // overried value only if it is higher than the current one stored in the array
+                if (valueToPutIn > interest[i])
+                {
+                    interest[i] = valueToPutIn;
+                }
+            }
+        }
+        interestTemp = interest;
+        return(danger, interest);
+    }
+
+    private void setTarget(AIData data)
+    {
+        if (data.targets != null)
+        {
+            // set current target to closest target in target list if there are targets
+            data.currentTarget = data.targets.OrderBy(target => Vector2.Distance(target, transform.position)).First();
+        }
+        else
+        {
+            // set target to zero if there are no targets
+            data.currentTarget = Vector2.zero;
+        }
+    }
+
+    private void getEightDirections()
+    {
+        // array of possible point combinations
+        int[] pointsArray = new[] {0, 1, -1};
+        // create current direction
+        Vector2 direction = Vector2.zero;
+
+        for (int i = 0; i < pointsArray.Length; i++)
+        {
+            // set x coordinate
+            direction.x = pointsArray[i];
+
+            for (int j = 0; j < pointsArray.Length; j++)
+            {
+                // set y coordinate
+                direction.y = pointsArray[j];
+                // add direction to directions list
+                directions.Add(direction.normalized);
+            }
+        }
+
+        // remove the first coordinate, which is (0, 0)
+        directions.RemoveAt(0);
+    }
+
+    private void OnDrawGizmos()
+    {
+        // do not show gizmos if showGizmos is false
+        if (!showGizmos)
+        {
+            return;
+        }
+
+        if (Application.isPlaying && interestTemp != null)
+        {
+            Gizmos.color = Color.green;
+            for (int i = 0; i < interestTemp.Length; i++)
+            {
+                Gizmos.DrawRay(transform.position, directions[i] * interestTemp[i]);
+            }
+            if (reachedLastTarget == false)
+            {
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawSphere(targetPositionCached, 0.1f);
+            }
+        }
+    }
+}

@@ -6,46 +6,80 @@ public class TargetDetector : Detector
 {
     [SerializeField] private float targetDetectionRange = 5.0f;
     [SerializeField] private LayerMask obstacleLayerMask, playerLayerMask;
+    [SerializeField] private Vector2 spawnPos = new Vector2(0f, 0f);
+    [SerializeField] private float durationBeforeReturningToSpawn = 5.0f;
     [SerializeField] private bool showGizmos = true;
-    [SerializeField] private bool showRaycast = true;
 
-    // gizmos parameters
     private List<Vector2> colliderPositions;
+    private float durationSinceLostTarget = 0f;
+    private bool lostTarget = false;
+
+    void Update()
+    {
+        // update durationSinceLostTarget if target is lost (out of range)
+        if (lostTarget)
+        {
+            durationSinceLostTarget += Time.deltaTime;
+        }
+    }
 
     public override void Detect(AIData data)
     {
+        // reset colliderPositions list to null
+        colliderPositions = null;
+
         // find out if player is near, only detect one player collider
-        Collider2D playerCollider = Physics2D.OverlapCircle(transform.position, targetDetectionRange, playerLayerMask);
+        Collider2D[] playerColliders = Physics2D.OverlapCircleAll(transform.position, targetDetectionRange, playerLayerMask);
 
         // if the player is detected within range
-        if (playerCollider != null)
+        if (playerColliders != null && playerColliders?.Length > 0)
         {
-            // check if you see the player
-            Vector2 direction = (playerCollider.transform.position - transform.position).normalized;
-            // use raycast to check line of sight
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, targetDetectionRange, obstacleLayerMask);
+            // when found target, reset returning to spawn
+            lostTarget = false;
+            durationSinceLostTarget = 0f;
 
-            // check if the player can be seen, and is on the player layer or player invulnerable layer
-            if (hit.collider != null && (playerLayerMask & (1 << hit.collider.gameObject.layer)) != 0)
+            // add each player to target list
+            foreach (Collider2D playerCollider in playerColliders)
             {
-                // show raycast if showRaycast is true
-                if (showRaycast)
+                // check if you see the player
+                Vector2 direction = (playerCollider.transform.position - transform.position).normalized;
+                // use raycast to check line of sight
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, targetDetectionRange, obstacleLayerMask);
+
+                // check if the player can be seen, and is on the player layer or player invulnerable layer
+                if (hit.collider != null && (playerLayerMask & (1 << hit.collider.gameObject.layer)) != 0)
                 {
-                    Debug.DrawRay(transform.position, direction * targetDetectionRange, Color.magenta);
+                    // show raycast if showGizmos is true
+                    if (showGizmos)
+                    {
+                        Debug.DrawRay(transform.position, direction * targetDetectionRange, Color.magenta);
+                    }
+
+                    // create a new colliderPositions list if list is null
+                    if (colliderPositions == null)
+                    {
+                        colliderPositions = new List<Vector2>();
+                    }
+
+                    // add player collider position to colliderPositions list if it doesn't exist
+                    if (!colliderPositions.Contains(playerCollider.transform.position))
+                    {
+                        colliderPositions.Add(playerCollider.transform.position);
+                    }
                 }
-
-                // set colliderPositions list to detected player collider
-                colliderPositions = new List<Vector2>() {playerCollider.transform.position};
             }
-            else
-            {
-                // set colliderPositions list if no player is detected
-                colliderPositions = null;
-            }
-
-            // store target position data
-            data.targets = colliderPositions;
         }
+        // if there are no players detected within range, go back to spawn position after a certain period
+        else if (durationSinceLostTarget > durationBeforeReturningToSpawn && lostTarget)
+        {
+            colliderPositions = new List<Vector2>() {spawnPos};
+        }
+        else
+        {
+            lostTarget = true;
+        }
+        // store target position data
+        data.targets = colliderPositions;
     }
 
     private void OnDrawGizmos()
