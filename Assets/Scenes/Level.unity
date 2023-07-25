@@ -2022,6 +2022,39 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &200585231
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 200585232}
+  m_Layer: 8
+  m_Name: Detectors
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &200585232
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200585231}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 648112134}
+  - {fileID: 1290357487}
+  m_Father: {fileID: 1690770379}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &241025798
 GameObject:
   m_ObjectHideFlags: 0
@@ -2036,7 +2069,7 @@ GameObject:
   - component: {fileID: 241025802}
   - component: {fileID: 241025804}
   - component: {fileID: 241025801}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2051,7 +2084,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 241025798}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.45, z: 0}
+  m_LocalPosition: {x: 0, y: -25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2220,7 +2253,7 @@ GameObject:
   - component: {fileID: 286592380}
   - component: {fileID: 286592379}
   - component: {fileID: 286592378}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tilemap Props
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13552,6 +13585,59 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bars: []
+--- !u!1 &648112133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 648112134}
+  - component: {fileID: 648112135}
+  m_Layer: 8
+  m_Name: Target Detector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &648112134
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648112133}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 200585232}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &648112135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648112133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d14309658a0c8d4d95e5b659d53a179, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetDetectionRange: 5
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 704
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 192
+  showGizmos: 1
+  showRaycast: 1
 --- !u!1 &776868081
 GameObject:
   m_ObjectHideFlags: 0
@@ -14194,6 +14280,56 @@ Transform:
   m_Father: {fileID: 25560479}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1290357486
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1290357487}
+  - component: {fileID: 1290357488}
+  m_Layer: 8
+  m_Name: Obstacle Detector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1290357487
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290357486}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 200585232}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1290357488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290357486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d851c1db649dce741b3e97f4b0e057a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionRange: 2
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  showGizmos: 1
+  showRaycast: 1
 --- !u!1 &1383043107
 GameObject:
   m_ObjectHideFlags: 0
@@ -14463,7 +14599,9 @@ GameObject:
   - component: {fileID: 1690770381}
   - component: {fileID: 1690770384}
   - component: {fileID: 1690770385}
-  m_Layer: 0
+  - component: {fileID: 1690770387}
+  - component: {fileID: 1690770386}
+  m_Layer: 8
   m_Name: Scorchtail
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -14483,6 +14621,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 600740314}
+  - {fileID: 200585232}
   m_Father: {fileID: 2116801468}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14556,7 +14695,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 1
+  m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -14605,6 +14744,38 @@ CapsuleCollider2D:
   m_Offset: {x: 0.15, y: 0.3}
   m_Size: {x: 2, y: 0.5}
   m_Direction: 1
+--- !u!114 &1690770386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690770378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8197ad4f8adff574cbf2ffac922bad89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectors:
+  - {fileID: 648112135}
+  - {fileID: 1290357488}
+  data: {fileID: 1690770387}
+  detectionDelay: 0.05
+--- !u!114 &1690770387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690770378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcbeae754bc827043944f5509d7582fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets: []
+  obstacles: []
+  currentTarget: {x: 0, y: 0}
 --- !u!1 &1717071234
 GameObject:
   m_ObjectHideFlags: 0
@@ -14707,7 +14878,7 @@ GameObject:
   - component: {fileID: 1834250528}
   - component: {fileID: 1834250527}
   - component: {fileID: 1834250526}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tilemap Obstacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
