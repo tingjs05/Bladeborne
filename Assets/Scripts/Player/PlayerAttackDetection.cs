@@ -11,13 +11,9 @@ public class PlayerAttackDetection : MonoBehaviour
 
     void manageCollision(Collider2D collider)
     {
-        if (collider.gameObject.tag == "Enemy")
+        if (collider.CompareTag("Enemy") && collider.GetType() == typeof(CapsuleCollider2D))
         {
             Debug.Log("Enemy Hit!");
-        }
-        else
-        {
-            Debug.Log("Hit " + collider.name);
         }
     }
 }
