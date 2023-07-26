@@ -22128,6 +22128,10 @@ PrefabInstance:
       propertyPath: spawnPos.y
       value: -25
       objectReference: {fileID: 0}
+    - target: {fileID: 4696817700001768113, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
+      propertyPath: enemyMovementAI
+      value: 
+      objectReference: {fileID: 621205987}
     - target: {fileID: 5447210030514646039, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: m_Name
       value: Context Steering

@@ -11,7 +11,7 @@ public class EnemyMovementAI : MonoBehaviour
     [SerializeField] private float detectionDelay = 0.05f;
 
     // override target event
-    public static event System.Action<List<Vector2>> overrideTarget;
+    public event System.Action<List<Vector2>> overrideTarget;
 
     // Start is called before the first frame update
     void Start()

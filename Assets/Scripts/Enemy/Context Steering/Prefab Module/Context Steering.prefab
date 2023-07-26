@@ -288,7 +288,7 @@ Transform:
   - {fileID: 6768403522697768898}
   - {fileID: 6450912963788239672}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1040951593344690525
 MonoBehaviour:
@@ -377,7 +377,7 @@ MonoBehaviour:
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 192
+  enemyMovementAI: {fileID: 4770432797937373721}
   spawnPos: {x: 0, y: 0}
   durationBeforeReturningToSpawn: 5
   showGizmos: 1
-  overrideTargetPositions: []

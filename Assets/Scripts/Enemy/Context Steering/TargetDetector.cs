@@ -6,6 +6,7 @@ public class TargetDetector : Detector
 {
     [SerializeField] private float targetDetectionRange = 5.0f;
     [SerializeField] private LayerMask obstacleLayerMask, playerLayerMask;
+    [SerializeField] private EnemyMovementAI enemyMovementAI;
     [SerializeField] private Vector2 spawnPos = new Vector2(0f, 0f);
     [SerializeField] private float durationBeforeReturningToSpawn = 5.0f;
     [SerializeField] private bool showGizmos = true;
@@ -15,12 +16,10 @@ public class TargetDetector : Detector
     private float durationSinceLostTarget = 0f;
     private bool lostTarget = false;
 
-    public static event System.Action targetDetected;
-
     void Start()
     {
         // subscribe to overried target event
-        EnemyMovementAI.overrideTarget += overrideTarget;
+        enemyMovementAI.overrideTarget += overrideTarget;
     }
 
     void Update()
@@ -40,9 +39,6 @@ public class TargetDetector : Detector
         // override target detection if there are set target positions to go to
         if (overrideTargetPositions != null && overrideTargetPositions.Count > 0)
         {
-            // raise event when target is set
-            targetDetected?.Invoke();
-
             data.targets = overrideTargetPositions;
             return;
         }
@@ -56,9 +52,6 @@ public class TargetDetector : Detector
             // when found target, reset returning to spawn
             lostTarget = false;
             durationSinceLostTarget = 0f;
-
-            // raise event when target is set
-            targetDetected?.Invoke();
 
             // add each player to target list
             foreach (Collider2D playerCollider in playerColliders)
@@ -94,9 +87,6 @@ public class TargetDetector : Detector
         // if there are no players detected within range, go back to spawn position after a certain period
         else if (durationSinceLostTarget > durationBeforeReturningToSpawn && lostTarget)
         {
-            // raise event when target is set
-            targetDetected?.Invoke();
-
             colliderPositions = new List<Vector2>() {spawnPos};
         }
         else if (!lostTarget)
