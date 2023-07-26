@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class EnemyMovementAI : MonoBehaviour
@@ -10,8 +11,11 @@ public class EnemyMovementAI : MonoBehaviour
     [SerializeField] private AIData data;
     [SerializeField] private float detectionDelay = 0.05f;
 
+    // enemy AI events
+    public event Action targetDetected;
+
     // override target event
-    public event System.Action<List<Vector2>> overrideTarget;
+    public event Action<List<Vector2>> overrideTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +37,21 @@ public class EnemyMovementAI : MonoBehaviour
         foreach (Detector detector in detectors)
         {
             detector.Detect(data);
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        checkEvents();
+    }
+
+    private void checkEvents()
+    {
+        // raise an event if targets are detected
+        if (data.targets != null || data.targets?.Count > 0)
+        {
+            targetDetected?.Invoke();
         }
     }
 }

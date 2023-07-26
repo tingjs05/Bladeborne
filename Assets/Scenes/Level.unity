@@ -14481,7 +14481,6 @@ GameObject:
   - component: {fileID: 1690770384}
   - component: {fileID: 1690770388}
   - component: {fileID: 1690770386}
-  - component: {fileID: 1690770387}
   m_Layer: 8
   m_Name: Scorchtail
   m_TagString: Enemy
@@ -14637,23 +14636,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d4301bfe2bb2c748aefc01dc631ea05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <sprite>k__BackingField: {fileID: 600740315}
-  <animator>k__BackingField: {fileID: 600740316}
-  <stats>k__BackingField: {fileID: 1690770388}
---- !u!114 &1690770387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1690770378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a1c3c4b83541ff4eaeca9de3d759cd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stateMachine: {fileID: 1690770386}
-  movement: {fileID: 621205987}
 --- !u!114 &1690770388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22069,8 +22051,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 1690770379}
     m_Modifications:
     - target: {fileID: 2182541653989406843, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
+      propertyPath: radius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182541653989406843, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: colliderSize
-      value: 1.2
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 2614627634529003523, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: m_RootOrder
@@ -22137,6 +22123,18 @@ PrefabInstance:
       value: Context Steering
       objectReference: {fileID: 0}
     - target: {fileID: 8241223872517771214, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
+      propertyPath: showGizmos
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241223872517771214, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
+      propertyPath: raysToShoot
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241223872517771214, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
+      propertyPath: detectionRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9052384929854077798, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: showGizmos
       value: 0
       objectReference: {fileID: 0}

@@ -21,11 +21,11 @@ public class ContextSolver : MonoBehaviour
             (danger, interest) = behavior.GetSteering(danger, interest, data);
         }
 
-        // substract danger values from interest array, so that the AI have less interest to travel to danger directions
+        // subtract danger values from interest array, so that the AI have less interest to travel to danger directions
         for (int i = 0; i < interest.Length; i++)
         {
             // clamp the value between 0 and 1
-            interest[i] = Mathf.Clamp01(interest[i] - danger[i]);
+            interest[i] = Mathf.Clamp01(interest[i] - (danger[i] * 2));
         }
 
         interestGizmo = interest;
@@ -50,6 +50,12 @@ public class ContextSolver : MonoBehaviour
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawRay(transform.position, resultDirection * rayLength);
+
+            Gizmos.color = Color.green;
+            for (int i = 0; i < interestGizmo.Length; i++)
+            {
+                Gizmos.DrawRay(transform.position, Directions.directions[i] * interestGizmo[i]);
+            }
         }
     }
 }
