@@ -13741,6 +13741,7 @@ MonoBehaviour:
     m_Bits: 192
   spawnPos: {x: 3, y: -25}
   durationBeforeReturningToSpawn: 5
+  overrideTargetLocations: []
   showGizmos: 0
 --- !u!1 &776868081
 GameObject:
@@ -14476,6 +14477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRange: 2
+  raysToShoot: 50
   layerMask:
     serializedVersion: 2
     m_Bits: 512

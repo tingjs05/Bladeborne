@@ -9,15 +9,7 @@ public class ObstacleAvoidanceBehavior : SteeringBehavior
 
     [SerializeField] private bool showGizmos = true;
 
-    private List<Vector2> directions = new List<Vector2>();
     private float[] dangersResultTemp;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        // set the list contatining 8 directions
-        getEightDirections();
-    }
 
     public override (float[] danger, float[] interest) GetSteering(float[] danger, float[] interest, AIData data)
     {
@@ -44,10 +36,10 @@ public class ObstacleAvoidanceBehavior : SteeringBehavior
             Vector2 directionToObstacleNormalized = directionToObstacle.normalized;
 
             // add obstacle parameters to danger array
-            for (int i = 0; i < directions.Count; i++)
+            for (int i = 0; i < Directions.directions.Length; i++)
             {
                 // calculate dot product of these two vectors, giving an estimate of how close is the direction to the direction to move in
-                float result = Vector2.Dot(directionToObstacleNormalized, directions[i]);
+                float result = Vector2.Dot(directionToObstacleNormalized, Directions.directions[i]);
 
                 float valueToPutIn = result * weight;
 
@@ -60,31 +52,6 @@ public class ObstacleAvoidanceBehavior : SteeringBehavior
         }
         dangersResultTemp = danger;
         return (danger, interest);
-    }
-
-    private void getEightDirections()
-    {
-        // array of possible point combinations
-        int[] pointsArray = new[] {0, 1, -1};
-        // create current direction
-        Vector2 direction = Vector2.zero;
-
-        for (int i = 0; i < pointsArray.Length; i++)
-        {
-            // set x coordinate
-            direction.x = pointsArray[i];
-
-            for (int j = 0; j < pointsArray.Length; j++)
-            {
-                // set y coordinate
-                direction.y = pointsArray[j];
-                // add direction to directions list
-                directions.Add(direction.normalized);
-            }
-        }
-
-        // remove the first coordinate, which is (0, 0)
-        directions.RemoveAt(0);
     }
 
     private void OnDrawGizmos()
@@ -100,7 +67,7 @@ public class ObstacleAvoidanceBehavior : SteeringBehavior
             Gizmos.color = Color.red;
             for (int i = 0; i < dangersResultTemp.Length; i++)
             {
-                Gizmos.DrawRay(transform.position, directions[i] * dangersResultTemp[i]);
+                Gizmos.DrawRay(transform.position, Directions.directions[i] * dangersResultTemp[i]);
             }
         }
         else

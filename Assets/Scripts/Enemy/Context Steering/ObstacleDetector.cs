@@ -5,18 +5,11 @@ using UnityEngine;
 public class ObstacleDetector : Detector
 {
     [SerializeField] private float detectionRange = 2.0f;
+    [SerializeField] private int raysToShoot = 50;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private bool showGizmos = true;
 
     private List<Vector2> colliderPositions;
-    private List<Vector2> directions = new List<Vector2>();
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        // set the list contatining 8 directions
-        getEightDirections();
-    }
 
     // detect surrounding obstacles using overlap circle
     public override void Detect(AIData data)
@@ -24,15 +17,18 @@ public class ObstacleDetector : Detector
         // reset colliderPositions list to null
         colliderPositions = null;
 
-        // raycast in all 8 directions to detect obstacles
-        foreach (Vector2 direction in directions)
+        // raycast around yourself to detect obstacles
+        for (int i = 0; i < raysToShoot; i++)
         {
+            // get ray direction
+            Vector2 direction = (Quaternion.Euler(0, 0, i * (360 / raysToShoot)) * transform.right).normalized;
+
             RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectionRange, layerMask);
 
             // show raycast if showGizmos is true
             if (showGizmos)
             {
-                Debug.DrawRay(transform.position, direction * detectionRange, Color.red);
+                Debug.DrawRay(transform.position, direction * detectionRange, Color.cyan);
             }
 
             // create a new colliderPositions list if list is null
@@ -49,31 +45,6 @@ public class ObstacleDetector : Detector
         }
         // store obstacle data
         data.obstacles = colliderPositions;
-    }
-
-    private void getEightDirections()
-    {
-        // array of possible point combinations
-        int[] pointsArray = new[] {0, 1, -1};
-        // create current direction
-        Vector2 direction = Vector2.zero;
-
-        for (int i = 0; i < pointsArray.Length; i++)
-        {
-            // set x coordinate
-            direction.x = pointsArray[i];
-
-            for (int j = 0; j < pointsArray.Length; j++)
-            {
-                // set y coordinate
-                direction.y = pointsArray[j];
-                // add direction to directions list
-                directions.Add(direction.normalized);
-            }
-        }
-
-        // remove the first coordinate, which is (0, 0)
-        directions.RemoveAt(0);
     }
 
     private void OnDrawGizmos()

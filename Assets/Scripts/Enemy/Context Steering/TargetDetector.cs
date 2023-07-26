@@ -14,6 +14,9 @@ public class TargetDetector : Detector
     private float durationSinceLostTarget = 0f;
     private bool lostTarget = false;
 
+    // public list of positions to go to instead of following the default behavior so that other scripts can set it
+    [HideInInspector] public List<Vector2> overrideTargetPositions;
+
     void Update()
     {
         // update durationSinceLostTarget if target is lost (out of range)
@@ -27,6 +30,13 @@ public class TargetDetector : Detector
     {
         // reset colliderPositions list to null
         colliderPositions = null;
+
+        // override target detection if there are set target positions to go to
+        if (overrideTargetPositions != null && overrideTargetPositions.Count > 0)
+        {
+            data.targets = overrideTargetPositions;
+            return;
+        }
 
         // find out if player is near, only detect one player collider
         Collider2D[] playerColliders = Physics2D.OverlapCircleAll(transform.position, targetDetectionRange, playerLayerMask);

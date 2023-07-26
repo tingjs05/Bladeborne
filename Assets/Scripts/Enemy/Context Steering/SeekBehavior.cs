@@ -9,17 +9,9 @@ public class SeekBehavior : SteeringBehavior
 
     [SerializeField] private bool showGizmos = true;
 
-    private List<Vector2> directions = new List<Vector2>();
     private bool reachedLastTarget = true;
     private Vector2 targetPositionCached;
     private float[] interestTemp;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        // set the list contatining 8 directions
-        getEightDirections();
-    }
 
     public override (float[] danger, float[] interest) GetSteering(float[] danger, float[] interest, AIData data)
     {
@@ -64,7 +56,7 @@ public class SeekBehavior : SteeringBehavior
         for (int i = 0; i < interest.Length; i++)
         {
             // calculate dot product of these two vectors, giving an estimate of how close is the direction to the direction to move in
-            float result = Vector2.Dot(directionToTarget.normalized, directions[i]);
+            float result = Vector2.Dot(directionToTarget.normalized, Directions.directions[i]);
 
             // accept only directions less than 90 degrees to the target direction
             if (result > 0)
@@ -96,31 +88,6 @@ public class SeekBehavior : SteeringBehavior
         }
     }
 
-    private void getEightDirections()
-    {
-        // array of possible point combinations
-        int[] pointsArray = new[] {0, 1, -1};
-        // create current direction
-        Vector2 direction = Vector2.zero;
-
-        for (int i = 0; i < pointsArray.Length; i++)
-        {
-            // set x coordinate
-            direction.x = pointsArray[i];
-
-            for (int j = 0; j < pointsArray.Length; j++)
-            {
-                // set y coordinate
-                direction.y = pointsArray[j];
-                // add direction to directions list
-                directions.Add(direction.normalized);
-            }
-        }
-
-        // remove the first coordinate, which is (0, 0)
-        directions.RemoveAt(0);
-    }
-
     private void OnDrawGizmos()
     {
         // do not show gizmos if showGizmos is false
@@ -134,7 +101,7 @@ public class SeekBehavior : SteeringBehavior
             Gizmos.color = Color.green;
             for (int i = 0; i < interestTemp.Length; i++)
             {
-                Gizmos.DrawRay(transform.position, directions[i] * interestTemp[i]);
+                Gizmos.DrawRay(transform.position, Directions.directions[i] * interestTemp[i]);
             }
             if (reachedLastTarget == false)
             {
