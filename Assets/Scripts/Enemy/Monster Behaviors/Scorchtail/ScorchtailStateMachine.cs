@@ -5,7 +5,7 @@ using UnityEngine;
 public class ScorchtailStateMachine : MonoBehaviour
 {
     // current state
-    private ScorchtailBaseState state;
+    public ScorchtailBaseState state {get; private set;}
 
     // states
     public ScorchtailIdleState idle {get; private set;}
@@ -15,6 +15,14 @@ public class ScorchtailStateMachine : MonoBehaviour
     public ScorchtailRollAttackState rollAtk {get; private set;}
     public ScorchtailTailAttackState tailAtk {get; private set;}
     public ScorchtailScratchAttackState scratchAtk {get; private set;}
+
+    // inspector fields
+    [field: SerializeField] public SpriteRenderer sprite {get; private set;}
+    [field: SerializeField] public Animator animator {get; private set;}
+    [field: SerializeField] public ScorchtailStats stats {get; private set;}
+
+    // components
+    public Rigidbody2D rb {get; private set;}
 
     void Awake()
     {
@@ -31,6 +39,9 @@ public class ScorchtailStateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // get components
+        rb = GetComponent<Rigidbody2D>();
+
         // set default state
         state = idle;
         state.OnEnter(this);

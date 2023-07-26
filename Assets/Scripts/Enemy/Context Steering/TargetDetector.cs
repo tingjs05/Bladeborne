@@ -11,11 +11,17 @@ public class TargetDetector : Detector
     [SerializeField] private bool showGizmos = true;
 
     private List<Vector2> colliderPositions;
+    private List<Vector2> overrideTargetPositions;
     private float durationSinceLostTarget = 0f;
     private bool lostTarget = false;
 
-    // public list of positions to go to instead of following the default behavior so that other scripts can set it
-    [HideInInspector] public List<Vector2> overrideTargetPositions;
+    public static event System.Action targetDetected;
+
+    void Start()
+    {
+        // subscribe to overried target event
+        EnemyMovementAI.overrideTarget += overrideTarget;
+    }
 
     void Update()
     {
@@ -34,6 +40,9 @@ public class TargetDetector : Detector
         // override target detection if there are set target positions to go to
         if (overrideTargetPositions != null && overrideTargetPositions.Count > 0)
         {
+            // raise event when target is set
+            targetDetected?.Invoke();
+
             data.targets = overrideTargetPositions;
             return;
         }
@@ -47,6 +56,9 @@ public class TargetDetector : Detector
             // when found target, reset returning to spawn
             lostTarget = false;
             durationSinceLostTarget = 0f;
+
+            // raise event when target is set
+            targetDetected?.Invoke();
 
             // add each player to target list
             foreach (Collider2D playerCollider in playerColliders)
@@ -82,14 +94,22 @@ public class TargetDetector : Detector
         // if there are no players detected within range, go back to spawn position after a certain period
         else if (durationSinceLostTarget > durationBeforeReturningToSpawn && lostTarget)
         {
+            // raise event when target is set
+            targetDetected?.Invoke();
+
             colliderPositions = new List<Vector2>() {spawnPos};
         }
-        else
+        else if (!lostTarget)
         {
             lostTarget = true;
         }
         // store target position data
         data.targets = colliderPositions;
+    }
+
+    private void overrideTarget(List<Vector2> targets)
+    {
+        overrideTargetPositions = targets;
     }
 
     private void OnDrawGizmos()

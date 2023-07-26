@@ -13,6 +13,8 @@ public class SeekBehavior : SteeringBehavior
     private Vector2 targetPositionCached;
     private float[] interestTemp;
 
+    public static event System.Action<bool> targetReached;
+
     public override (float[] danger, float[] interest) GetSteering(float[] danger, float[] interest, AIData data)
     {
         // if don't have a target, stop seeking, else set a new target
@@ -29,6 +31,9 @@ public class SeekBehavior : SteeringBehavior
                 // set target position
                 setTarget(data);
             }
+
+            // raise event whether target location has been reached
+            targetReached?.Invoke(reachedLastTarget);
         }
         else
         {
