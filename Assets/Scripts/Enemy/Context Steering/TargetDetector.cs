@@ -43,7 +43,7 @@ public class TargetDetector : Detector
             return;
         }
 
-        // find out if player is near, only detect one player collider
+        // find out if a player is nearby
         Collider2D[] playerColliders = Physics2D.OverlapCircleAll(transform.position, targetDetectionRange, playerLayerMask);
 
         // if the player is detected within range

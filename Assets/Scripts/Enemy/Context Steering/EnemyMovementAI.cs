@@ -13,6 +13,7 @@ public class EnemyMovementAI : MonoBehaviour
 
     // enemy AI events
     public event Action targetDetected;
+    public event Action targetReached;
 
     // override target event
     public event Action<List<Vector2>> overrideTarget;
@@ -29,6 +30,9 @@ public class EnemyMovementAI : MonoBehaviour
 
     // create a public method to override target behavior
     public void setOverrideTargetPosition(List<Vector2> targets = null) { overrideTarget?.Invoke(targets); }
+
+    // get AI data
+    public AIData getData() => data;
 
     // detect player and obstacles
     private void PerformDetection()
@@ -48,10 +52,18 @@ public class EnemyMovementAI : MonoBehaviour
 
     private void checkEvents()
     {
-        // raise an event if targets are detected
         if (data.targets != null || data.targets?.Count > 0)
         {
-            targetDetected?.Invoke();
+            // raise event if reached target (no current target) and target is within range
+            if (data.currentTarget == Vector2.zero)
+            {
+                targetReached?.Invoke();
+            }
+            // raise an event if targets are detected but not reached
+            else
+            {
+                targetDetected?.Invoke();
+            }
         }
-    }
+    }    
 }

@@ -13452,17 +13452,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2614627634529003523, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
   m_PrefabInstance: {fileID: 6266049277155302152}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &621205987 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4770432797937373721, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
-  m_PrefabInstance: {fileID: 6266049277155302152}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8197ad4f8adff574cbf2ffac922bad89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &634559996
 GameObject:
   m_ObjectHideFlags: 0
@@ -14466,17 +14455,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1485368577}
   m_CullTransparentMesh: 1
---- !u!114 &1495933122 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9052384929854077798, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
-  m_PrefabInstance: {fileID: 6266049277155302152}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8de73870b7555c4418bcfec59c1eb28e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1690770378
 GameObject:
   m_ObjectHideFlags: 0
@@ -14647,6 +14625,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d4301bfe2bb2c748aefc01dc631ea05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 192
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  targetDetectionRange: 5
+  <minRunDistance>k__BackingField: 2.5
 --- !u!114 &1690770388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22061,14 +22047,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1690770379}
     m_Modifications:
-    - target: {fileID: 2182541653989406843, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
-      propertyPath: radius
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2182541653989406843, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
-      propertyPath: colliderSize
-      value: 0.75
-      objectReference: {fileID: 0}
     - target: {fileID: 2614627634529003523, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -22113,34 +22091,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4174104336646878554, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
-      propertyPath: seekBehavior
-      value: 
-      objectReference: {fileID: 1495933122}
-    - target: {fileID: 4174104336646878554, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
-      propertyPath: obstacleLayerMask.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
     - target: {fileID: 4696817700001768113, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: showGizmos
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4696817700001768113, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
-      propertyPath: spawnPos.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4696817700001768113, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
-      propertyPath: spawnPos.y
-      value: -25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4696817700001768113, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
-      propertyPath: spawnRadius
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4696817700001768113, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
-      propertyPath: enemyMovementAI
-      value: 
-      objectReference: {fileID: 621205987}
     - target: {fileID: 5447210030514646039, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: m_Name
       value: Context Steering
@@ -22148,22 +22102,6 @@ PrefabInstance:
     - target: {fileID: 8241223872517771214, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: showGizmos
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8241223872517771214, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
-      propertyPath: raysToShoot
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 8241223872517771214, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
-      propertyPath: detectionRange
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9052384929854077798, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
-      propertyPath: showGizmos
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9052384929854077798, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
-      propertyPath: targetReachedThreshold
-      value: 0.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -9,8 +9,8 @@ public class ScorchtailStateMachine : MonoBehaviour
 
     // states
     public ScorchtailIdleState idle {get; private set;}
-    public ScorchtailWalkState walk {get; private set;}
-    public ScorchtailRunState run {get; private set;}
+    public ScorchtailChaseState chase {get; private set;}
+    public ScorchtailPatrolState patrol {get; private set;}
     public ScorchtailStunState stun {get; private set;}
     public ScorchtailRollAttackState rollAtk {get; private set;}
     public ScorchtailTailAttackState tailAtk {get; private set;}
@@ -25,15 +25,19 @@ public class ScorchtailStateMachine : MonoBehaviour
     public EnemyMovementAI movement {get; private set;}
     public ScorchtailStats stats {get; private set;}
 
-    public Vector2 moveDirection {get; private set;}
+    // inspector fields
+    [field: SerializeField] public float minRunDistance {get; private set;} = 2.5f;
+    [field: SerializeField] public float patrolRange {get; private set;} = 2.0f;
 
+    // public properties
+    public Vector2 moveDirection {get; private set;}
 
     void Awake()
     {
         // create instance of each state
         idle = new ScorchtailIdleState();
-        walk = new ScorchtailWalkState();
-        run = new ScorchtailRunState();
+        chase = new ScorchtailChaseState();
+        patrol = new ScorchtailPatrolState();
         stun = new ScorchtailStunState();
         rollAtk = new ScorchtailRollAttackState();
         tailAtk = new ScorchtailTailAttackState();
@@ -58,6 +62,7 @@ public class ScorchtailStateMachine : MonoBehaviour
 
         // subscribe to events
         movement.targetDetected += targetDetected;
+        movement.targetReached += targetReached;
     }
 
     // Update is called once per frame
@@ -66,8 +71,8 @@ public class ScorchtailStateMachine : MonoBehaviour
         // update state
         state.OnUpdate(this);
 
-        // if enemy is walking or running, update move direction
-        if (state == walk || state == run)
+        // if enemy chasing the player, update move direction
+        if (state == chase)
         {
             moveDirection = movement.getDirectionToMove();
         }
@@ -84,6 +89,11 @@ public class ScorchtailStateMachine : MonoBehaviour
     // event handlers
     private void targetDetected()
     {
-        switchState(walk);
+        switchState(chase);
+    }
+
+    private void targetReached()
+    {
+        switchState(idle);
     }
 }
