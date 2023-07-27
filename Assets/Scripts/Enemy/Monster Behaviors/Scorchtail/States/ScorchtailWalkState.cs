@@ -14,7 +14,7 @@ public class ScorchtailWalkState : ScorchtailBaseState
         enemy.rb.velocity = enemy.stats.walkSpeed * enemy.moveDirection;
 
         // flip sprite according to direction
-        enemy.sprite.flipX = enemy.moveDirection.x > 0;
+        enemy.sprite.flipX = enemy.moveDirection.x > 0.15f;
     }
 
     public override void OnExit(ScorchtailStateMachine enemy)

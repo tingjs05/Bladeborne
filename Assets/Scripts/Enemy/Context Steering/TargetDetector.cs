@@ -62,7 +62,7 @@ public class TargetDetector : Detector
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, targetDetectionRange, obstacleLayerMask);
 
                 // check if the player can be seen, and is on the player layer or player invulnerable layer
-                if (hit.collider != null && (playerLayerMask & (1 << hit.collider.gameObject.layer)) != 0)
+                if (hit.collider != null && (playerLayerMask & (1 << hit.collider.gameObject.layer)) != 0 && !playerCollider.isTrigger)
                 {
                     // show raycast if showGizmos is true
                     if (showGizmos)
@@ -77,9 +77,9 @@ public class TargetDetector : Detector
                     }
 
                     // add player collider position to colliderPositions list if it doesn't exist
-                    if (!colliderPositions.Contains(playerCollider.transform.position))
+                    if (!colliderPositions.Contains((Vector2) hit.point))
                     {
-                        colliderPositions.Add(playerCollider.transform.position);
+                        colliderPositions.Add(hit.point);
                     }
                 }
             }
@@ -95,11 +95,6 @@ public class TargetDetector : Detector
         }
         // store target position data
         data.targets = colliderPositions;
-    }
-
-    private void overrideTarget(List<Vector2> targets)
-    {
-        overrideTargetPositions = targets;
     }
 
     private void OnDrawGizmos()
@@ -124,5 +119,11 @@ public class TargetDetector : Detector
         {
             Gizmos.DrawSphere(position, 0.1f);
         }
+    }
+
+    // event handler
+    private void overrideTarget(List<Vector2> targets)
+    {
+        overrideTargetPositions = targets;
     }
 }
