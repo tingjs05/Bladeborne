@@ -27,10 +27,12 @@ public class ScorchtailStateMachine : MonoBehaviour
 
     // inspector fields
     [field: SerializeField] public float minRunDistance {get; private set;} = 2.5f;
-    [field: SerializeField] public float patrolRange {get; private set;} = 2.0f;
+    [field: SerializeField] public float patrolRange {get; private set;} = 5.0f;
+    [field: SerializeField] public float patrolDelay {get; private set;} = 2.0f;
 
     // public properties
     public Vector2 moveDirection {get; private set;}
+    public float durationSinceLastPatrol {get; private set;} = 0f;
 
     void Awake()
     {
@@ -71,11 +73,15 @@ public class ScorchtailStateMachine : MonoBehaviour
         // update state
         state.OnUpdate(this);
 
-        // if enemy chasing the player, update move direction
-        if (state == chase)
+        if (state.Equals(chase))
         {
+            Debug.Log("getting direction");
+            // update move direction
             moveDirection = movement.getDirectionToMove();
         }
+
+        // increment duration since last patrol
+        durationSinceLastPatrol += Time.deltaTime;
     }
 
     // switch state method
@@ -84,6 +90,12 @@ public class ScorchtailStateMachine : MonoBehaviour
         state.OnExit(this);
         state = newState;
         state.OnEnter(this);
+    }
+
+    // reset patrol duration counter
+    public void resetPatrolCounter()
+    {
+        durationSinceLastPatrol = 0f;
     }
 
     // event handlers

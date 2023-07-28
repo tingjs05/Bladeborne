@@ -9,28 +9,29 @@ public class ScorchtailChaseState : ScorchtailBaseState
 
     public override void OnEnter(ScorchtailStateMachine enemy)
     {
+        Debug.Log("Chase");
         // decide whether to walk or run
         decideWalkRun(enemy);
     }
 
     public override void OnUpdate(ScorchtailStateMachine enemy)
     {
+        // if there are targets in range and is not seeking target, that means target is lost, so start patrolling
+        if (enemy.movement.getData().currentTarget == Vector2.zero)
+        {
+            enemy.switchState(enemy.patrol);
+        }
+
         // move in the direction
         enemy.rb.velocity = moveSpeed * enemy.moveDirection;
 
         // flip sprite according to direction
         enemy.sprite.flipX = enemy.moveDirection.x > flipThreshold;
-
-        // if there is no move direction and still chasing, that means player is lost, so start patrolling
-        // if (enemy.moveDirection == Vector2.zero)
-        // {
-        //     enemy.switchState(enemy.patrol);
-        // }
     }
 
     public override void OnExit(ScorchtailStateMachine enemy)
     {
-        
+        enemy.movement.setOverrideTargetPosition();
     }
 
     private void decideWalkRun(ScorchtailStateMachine enemy)

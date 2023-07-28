@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     [field: Header("Movement")]
     [field: SerializeField] public float walkSpeed {get; private set;} = 1.0f;
     [field: SerializeField] public float sprintSpeed {get; private set;} = 2.0f;
-    [field: SerializeField] public float staminaDrainPerSecond {get; private set;} = 10.0f;
+    [field: SerializeField] public float staminaDrainPerSecond {get; private set;} = 5.0f;
 
     // dodge
     [field: Header("Dodge")]
