@@ -14639,7 +14639,7 @@ MonoBehaviour:
   <patrolRange>k__BackingField: 5
   <patrolDelay>k__BackingField: 2
   <attackRange>k__BackingField: 0.75
-  lastMoveDirection: {x: 0, y: 0}
+  flipSprite: 0
 --- !u!114 &1690770388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14652,7 +14652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db7bba030ddc3a40adfcbceb181f3de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <maxHealth>k__BackingField: 1000
+  <maxHealth>k__BackingField: 1500
   <walkSpeed>k__BackingField: 1.2
   <runSpeed>k__BackingField: 2.5
   <scratchAttackDamage>k__BackingField: 50

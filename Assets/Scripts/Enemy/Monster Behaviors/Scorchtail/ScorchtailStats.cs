@@ -2,23 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScorchtailStats : MonoBehaviour
+public class ScorchtailStats : EnemyStats
 {
     [field: Header("Health")]
-    [field: SerializeField] public float maxHealth {get; private set;} = 1000.0f;
-    private float health;
-    // create a public Health reference for health, and clamp health to keep value within range
-    public float Health
-    {
-        get
-        {
-            return health;
-        } 
-        set
-        {
-            health = Mathf.Clamp(value, 0f, maxHealth);
-        }
-    }
+    [field: SerializeField] public float maxHealth {get; private set;} = 1500.0f;
+    public float health {get; private set;}
 
     [field: Header("Movement")]
     [field: SerializeField] public float walkSpeed {get; private set;} = 1.2f;
@@ -36,4 +24,16 @@ public class ScorchtailStats : MonoBehaviour
     [field: SerializeField] public float rollAttackDamage {get; private set;} = 250.0f;
     [field: SerializeField] public float rollAttackRange {get; private set;} = 0.8f;
     [field: SerializeField] public float rollAttackSpeed {get; private set;} = 3.0f;
+
+    // public method to set health
+    public override void setHealth(float value)
+    {
+        health = Mathf.Clamp(value, 0f, maxHealth);
+    }
+
+    // public method to change health
+    public override void changeHealth(float value)
+    {
+        health = Mathf.Clamp(health + value, 0f, maxHealth);
+    }
 }

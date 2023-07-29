@@ -40,8 +40,9 @@ public class ScorchtailStateMachine : MonoBehaviour
     [field: SerializeField] public float patrolRange {get; private set;} = 5.0f;
     [field: SerializeField] public float patrolDelay {get; private set;} = 2.0f;
 
-    [field: Header("Detection")]
+    [field: Header("Attacks")]
     [field: SerializeField] public float attackRange {get; private set;} = 0.75f;
+    [field: SerializeField] public float attackCooldown {get; private set;} = 0.7f;
 
     // other public properties
     public Vector2 moveDirection {get; private set;} = Vector2.zero;
@@ -78,7 +79,7 @@ public class ScorchtailStateMachine : MonoBehaviour
         healthBar.setMax(stats.maxHealth);
 
         // set current health to max health
-        stats.Health = stats.maxHealth;
+        stats.setHealth(stats.maxHealth);
 
         // set default state
         state = idle;
@@ -89,7 +90,7 @@ public class ScorchtailStateMachine : MonoBehaviour
     void Update()
     {
         // update health bar
-        healthBar.setValue(stats.Health);
+        healthBar.setValue(stats.health);
 
         // update state
         state.OnUpdate(this);
@@ -113,10 +114,5 @@ public class ScorchtailStateMachine : MonoBehaviour
     public void resetPatrolCounter()
     {
         durationSinceLastPatrol = 0f;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(new Vector2(transform.position.x - 0.5f, transform.position.y), 0.75f);
     }
 }

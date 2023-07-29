@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerThirdAttackState : PlayerBaseState
@@ -6,6 +8,11 @@ public class PlayerThirdAttackState : PlayerBaseState
     private float durationInState;
     private float attackDelay = 0.3f;
     private float attackForce = 15.0f;
+
+    private bool attacked;
+
+    private GameObject enemy;
+    private List<GameObject> enemiesHit;
 
     private Vector2[] attackRange = new[]{
         new Vector2(-0.1f, -0.35f),
@@ -31,17 +38,41 @@ public class PlayerThirdAttackState : PlayerBaseState
         // set attack range
         player.setAttackRange(attackRange);
 
-        // move player a little in the direction of the attack by adding a impulse force
-        player.rb.AddForce(player.mouseDirection * attackForce, ForceMode2D.Impulse);
+        // set attacked to false
+        attacked = false;
+
+        // subscribe to enemy hit event
+        player.attackDetection.enemyHit += dealDamage;
+
+        // reset enemies hit list
+        enemiesHit = new List<GameObject>();
+
+        // reset enemy to null
+        enemy = null;
     }
 
     public override void OnUpdate(PlayerController player)
     {
+        // deal damage if an enemy is hit and has not been hit before
+        if (enemy != null && !enemiesHit.Contains(enemy))
+        {
+            enemy.GetComponent<EnemyStats>().changeHealth(-player.attackDamage3);
+
+            // log the enemies that have been hit
+            enemiesHit.Add(enemy);
+        }
+    
         // activate attack after delay
-        if (durationInState >= attackDelay)
+        if (durationInState >= attackDelay && !attacked)
         {
             // activate attack
             player.attackRange.SetActive(true);
+
+            // move player a little in the direction of the attack by adding a impulse force
+            player.rb.AddForce(player.mouseDirection * attackForce, ForceMode2D.Impulse);
+
+            // set attacked to true
+            attacked = true;
         }
 
         // only increase stamina when below max
@@ -73,5 +104,11 @@ public class PlayerThirdAttackState : PlayerBaseState
 
         // switch weapon animation back to idle
         player.weaponAnimator.Play("Weapon_Idle");
+    }
+
+    // event handlers
+    private void dealDamage(GameObject enemy)
+    {
+        this.enemy = enemy;
     }
 }

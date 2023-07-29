@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerSecondAttackState : PlayerBaseState
@@ -8,6 +10,9 @@ public class PlayerSecondAttackState : PlayerBaseState
     private bool bufferedAttack = false;
     private bool backToIdle = false;
     private bool moving = false;
+
+    private GameObject enemy;
+    private List<GameObject> enemiesHit;
 
     private Vector2[] attackRange = new[]{
         new Vector2(0.2f, -0.3f),
@@ -29,10 +34,28 @@ public class PlayerSecondAttackState : PlayerBaseState
 
         // activate attack
         player.attackRange.SetActive(true);
+
+        // subscribe to enemy hit event
+        player.attackDetection.enemyHit += dealDamage;
+
+        // reset enemies hit list
+        enemiesHit = new List<GameObject>();
+
+        // reset enemy to null
+        enemy = null;
     }
 
     public override void OnUpdate(PlayerController player)
     {
+        // deal damage if an enemy is hit and has not been hit before
+        if (enemy != null && !enemiesHit.Contains(enemy))
+        {
+            enemy.GetComponent<EnemyStats>().changeHealth(-player.attackDamage2);
+
+            // log the enemies that have been hit
+            enemiesHit.Add(enemy);
+        }
+
         // update input
         player.updateInput(false);
         // move player if there is input
@@ -100,5 +123,11 @@ public class PlayerSecondAttackState : PlayerBaseState
             player.weaponAnimator.Play("Weapon_Idle");
             backToIdle = false;
         }
+    }
+
+    // event handlers
+    private void dealDamage(GameObject enemy)
+    {
+        this.enemy = enemy;
     }
 }

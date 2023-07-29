@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class ScorchtailIdleState : ScorchtailBaseState
 {
+    private float durationSinceLastAttack;
+
     private bool targetDetected = false;
+    private bool attacked = false;
 
     public override void OnEnter(ScorchtailStateMachine enemy)
     {
@@ -13,25 +16,33 @@ public class ScorchtailIdleState : ScorchtailBaseState
 
         // flip sprite if needed
         enemy.sprite.flipX = enemy.flipSprite;
+
+        durationSinceLastAttack = 0f;
     }
 
     public override void OnUpdate(ScorchtailStateMachine enemy)
     {
-        // if player is within attack range, attack the player
-        if (playersInAttackRange(enemy.transform.position, enemy.attackRange, enemy.playerLayerMask))
+        // if player is within attack range and duration since last attack is more than attac cooldown (or there is no last attack), attack the player
+        if (playersInAttackRange(enemy.transform.position, enemy.attackRange, enemy.playerLayerMask) && (durationSinceLastAttack >= enemy.attackCooldown || !attacked))
         {
             // randomly choose betwwen tail whip or scratch attack
             System.Random rand = new System.Random();
             int choice = rand.Next(0, 3);
+
+            // set attacked to true
+            attacked = true;
+
             // lower chance to use tail whip attack
             if (choice == 0)
             {
                 enemy.switchState(enemy.tailAtk);
+                return;
             }
             // higher chance to use scratch attack
             else
             {
                 enemy.switchState(enemy.scratchAtk);
+                return;
             }
         }
 
@@ -39,7 +50,13 @@ public class ScorchtailIdleState : ScorchtailBaseState
         if (targetDetected)
         {
             enemy.switchState(enemy.chase);
+
+            // set attacked to false
+            attacked = false;
         }
+
+        // increment duration since last attack
+        durationSinceLastAttack += Time.deltaTime;
     }
 
     public override void OnExit(ScorchtailStateMachine enemy)
