@@ -14625,7 +14625,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d4301bfe2bb2c748aefc01dc631ea05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 1177911765}
   <playerLayerMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 192
@@ -14639,6 +14638,10 @@ MonoBehaviour:
   <patrolRange>k__BackingField: 5
   <patrolDelay>k__BackingField: 2
   <attackRange>k__BackingField: 0.75
+  <attackCooldown>k__BackingField: 0.7
+  healthBar: {fileID: 1177911765}
+  spawnLocation: {x: 3, y: -25}
+  spawnRadius: 12
   flipSprite: 0
 --- !u!114 &1690770388
 MonoBehaviour:
@@ -22064,7 +22067,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2182541653989406843, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: showGizmos
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2182541653989406843, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: colliderSize
@@ -22116,7 +22119,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4174104336646878554, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: showGizmos
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4696817700001768113, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: spawnPos.x
@@ -22132,7 +22135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9052384929854077798, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: showGizmos
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9052384929854077798, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: targetReachedThreshold

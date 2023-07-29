@@ -25,10 +25,6 @@ public class ScorchtailStateMachine : MonoBehaviour
     public EnemyMovementAI movement {get; private set;}
     public ScorchtailStats stats {get; private set;}
 
-    // private inspector fields
-    [Header("UI")]
-    [SerializeField] private Bar healthBar;
-
     // public inspector properties
     [field: Header("Layer Masks")]
     [field: SerializeField] public LayerMask playerLayerMask {get; private set;}
@@ -43,6 +39,14 @@ public class ScorchtailStateMachine : MonoBehaviour
     [field: Header("Attacks")]
     [field: SerializeField] public float attackRange {get; private set;} = 0.75f;
     [field: SerializeField] public float attackCooldown {get; private set;} = 0.7f;
+
+    // private inspector fields
+    [Header("UI")]
+    [SerializeField] private Bar healthBar;
+
+    [Header("Return to Spawn Behavior")]
+    [SerializeField] private Vector2 spawnLocation = Vector2.zero;
+    [SerializeField] private float spawnRadius = 12.0f;
 
     // other public properties
     public Vector2 moveDirection {get; private set;} = Vector2.zero;
@@ -89,6 +93,9 @@ public class ScorchtailStateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // check if enemy is within spawn radius
+        checkLocation();
+
         // update health bar
         healthBar.setValue(stats.health);
 
@@ -114,5 +121,20 @@ public class ScorchtailStateMachine : MonoBehaviour
     public void resetPatrolCounter()
     {
         durationSinceLastPatrol = 0f;
+    }
+
+    // check if current location is within spawn radius
+    private void checkLocation()
+    {
+        // if outside spawn radius, try to go back
+        if (Vector2.Distance(transform.position, spawnLocation) > spawnRadius)
+        {
+            movement.setOverrideTargetPosition(new List<Vector2>() {spawnLocation});
+        }
+        // when within spawn radius and previous target is spawn location, reset targets
+        else if (movement.getData().currentTarget ==  spawnLocation)
+        {
+            movement.setOverrideTargetPosition();
+        }
     }
 }
