@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2
   colliderSize: 0.75
-  showGizmos: 1
+  showGizmos: 0
 --- !u!1 &1040754681607897672
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetReachedThreshold: 0.6
-  showGizmos: 1
+  showGizmos: 0
 --- !u!1 &4354241433308861809
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,7 +175,7 @@ MonoBehaviour:
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 512
-  showGizmos: 1
+  showGizmos: 0
 --- !u!1 &5038751760017402230
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,6 +382,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   enemyMovementAI: {fileID: 4770432797937373721}
-  spawnPos: {x: 3, y: -25}
+  spawnPos: {x: 0, y: 0}
   durationBeforeReturningToSpawn: 5
   showGizmos: 0

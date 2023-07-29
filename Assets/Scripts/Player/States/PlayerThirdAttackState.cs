@@ -5,6 +5,7 @@ public class PlayerThirdAttackState : PlayerBaseState
     private float stateDuration = 0.7f;
     private float durationInState;
     private float attackDelay = 0.3f;
+    private float attackForce = 15.0f;
 
     private Vector2[] attackRange = new[]{
         new Vector2(-0.1f, -0.35f),
@@ -29,6 +30,9 @@ public class PlayerThirdAttackState : PlayerBaseState
 
         // set attack range
         player.setAttackRange(attackRange);
+
+        // move player a little in the direction of the attack by adding a impulse force
+        player.rb.AddForce(player.mouseDirection * attackForce, ForceMode2D.Impulse);
     }
 
     public override void OnUpdate(PlayerController player)
@@ -51,9 +55,6 @@ public class PlayerThirdAttackState : PlayerBaseState
         {
             // increment duration in state
             durationInState += Time.deltaTime;
-
-            // move player a little in the direction of the attack
-            player.rb.velocity = player.mouseDirection * 0.25f;
         }
         // if at max state duration, switch back to idle
         else

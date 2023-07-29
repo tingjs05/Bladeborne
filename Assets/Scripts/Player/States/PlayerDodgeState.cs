@@ -11,6 +11,9 @@ public class PlayerDodgeState : PlayerBaseState
         // play dodge animation
         player.playerAnimator.Play("Player_Dodge");
 
+        // set player layer to ignore damage
+        player.gameObject.layer = LayerMask.NameToLayer("Player Invulnerable");
+
         //check if player's weapon is sheathed, otherwise sheath weapon
         if (!player.isSheathed)
         {
@@ -69,5 +72,8 @@ public class PlayerDodgeState : PlayerBaseState
             player.toggleSheath();
             sheathedToDodge = false;
         }
+
+        // set player layer to default player layer
+        player.gameObject.layer = LayerMask.NameToLayer("Player");
     }
 }

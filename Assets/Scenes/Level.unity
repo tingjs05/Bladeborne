@@ -2113,8 +2113,8 @@ MonoBehaviour:
   <maxHealth>k__BackingField: 1000
   <maxStamina>k__BackingField: 100
   <staminaGainPerSecond>k__BackingField: 10
-  <healthBarObject>k__BackingField: {fileID: 1923683102}
-  <staminaBarObject>k__BackingField: {fileID: 634559996}
+  healthBarObject: {fileID: 1923683102}
+  staminaBarObject: {fileID: 634559996}
   playerSprite: {fileID: 1851182753}
 --- !u!61 &241025802
 BoxCollider2D:
@@ -14593,7 +14593,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -14625,6 +14625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d4301bfe2bb2c748aefc01dc631ea05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 1177911765}
   <playerLayerMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 192
@@ -14634,10 +14635,11 @@ MonoBehaviour:
   <obstacleLayerMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 512
-  <minRunDistance>k__BackingField: 2.5
+  <minRunDistance>k__BackingField: 3
   <patrolRange>k__BackingField: 5
-  <patrolDelay>k__BackingField: 4
-  <attackRange>k__BackingField: 0.6
+  <patrolDelay>k__BackingField: 2
+  <attackRange>k__BackingField: 0.75
+  lastMoveDirection: {x: 0, y: 0}
 --- !u!114 &1690770388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14650,8 +14652,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db7bba030ddc3a40adfcbceb181f3de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <maxHealth>k__BackingField: 1000
   <walkSpeed>k__BackingField: 1.2
   <runSpeed>k__BackingField: 2.5
+  <scratchAttackDamage>k__BackingField: 50
+  <scratchAttackRange>k__BackingField: 0.75
+  <tailAttackDamage>k__BackingField: 100
+  <tailAttackRange>k__BackingField: 0.75
+  <rollAttackDamage>k__BackingField: 250
+  <rollAttackRange>k__BackingField: 0.8
+  <rollAttackSpeed>k__BackingField: 3
 --- !u!1 &1717071234
 GameObject:
   m_ObjectHideFlags: 0
@@ -21969,8 +21979,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 49.2, y: 0}
-  m_SizeDelta: {x: -101.6, y: -43.800003}
+  m_AnchoredPosition: {x: 49.205, y: 0}
+  m_SizeDelta: {x: -101.59, y: -43.800003}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2023208432
 MonoBehaviour:
@@ -22054,7 +22064,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2182541653989406843, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: showGizmos
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2182541653989406843, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
+      propertyPath: colliderSize
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 2614627634529003523, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: m_RootOrder
@@ -22102,23 +22116,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4174104336646878554, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: showGizmos
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4696817700001768113, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
-      propertyPath: showGizmos
-      value: 0
+      propertyPath: spawnPos.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4696817700001768113, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
+      propertyPath: spawnPos.y
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 5447210030514646039, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: m_Name
       value: Context Steering
       objectReference: {fileID: 0}
-    - target: {fileID: 8241223872517771214, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
-      propertyPath: showGizmos
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9052384929854077798, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: showGizmos
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9052384929854077798, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
+      propertyPath: targetReachedThreshold
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

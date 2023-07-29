@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ScorchtailIdleState : ScorchtailBaseState
 {
-    bool targetDetected = false;
+    private bool targetDetected = false;
 
     public override void OnEnter(ScorchtailStateMachine enemy)
     {
@@ -10,6 +10,9 @@ public class ScorchtailIdleState : ScorchtailBaseState
         enemy.movement.targetDetected += onTargetDetected;
 
         enemy.animator.Play("Scorchtail_Idle");
+
+        // flip sprite if needed
+        enemy.sprite.flipX = enemy.flipSprite;
     }
 
     public override void OnUpdate(ScorchtailStateMachine enemy)
@@ -17,7 +20,19 @@ public class ScorchtailIdleState : ScorchtailBaseState
         // if player is within attack range, attack the player
         if (playersInAttackRange(enemy.transform.position, enemy.attackRange, enemy.playerLayerMask))
         {
-            enemy.switchState(enemy.scratchAtk);
+            // randomly choose betwwen tail whip or scratch attack
+            System.Random rand = new System.Random();
+            int choice = rand.Next(0, 3);
+            // lower chance to use tail whip attack
+            if (choice == 0)
+            {
+                enemy.switchState(enemy.tailAtk);
+            }
+            // higher chance to use scratch attack
+            else
+            {
+                enemy.switchState(enemy.scratchAtk);
+            }
         }
 
         // if taget is detected, switch to chase state to chase target

@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public float attackDamage3 {get; private set;} = 45.0f;
     public GameObject attackRange {get; private set;}
     public PolygonCollider2D attackCollider {get; private set;}
+    public PlayerAttackDetection attackDetection {get; private set;}
 
     // health
     [field: Header("Health")]
@@ -89,9 +90,9 @@ public class PlayerController : MonoBehaviour
     }
 
     // health and stamina bar
-    [field: Header("UI")]
-    [field: SerializeField] public GameObject healthBarObject {get; private set;}
-    [field: SerializeField] public GameObject staminaBarObject {get; private set;}
+    [Header("UI")]
+    [SerializeField] private GameObject healthBarObject;
+    [SerializeField] private GameObject staminaBarObject;
     private Bar healthBar;
     private Bar staminaBar;
 
@@ -133,6 +134,9 @@ public class PlayerController : MonoBehaviour
 
         // get attack collider component
         attackCollider = attackRange.GetComponent<PolygonCollider2D>();
+
+        // get attack detection component
+        attackDetection = attackRange.GetComponent<PlayerAttackDetection>();
 
         // get weapon sprite object from weapon object
         weaponSprite = weapon.transform.GetChild(0).gameObject;
@@ -240,7 +244,7 @@ public class PlayerController : MonoBehaviour
         updateMousePos();
 
         // get direction
-        mouseDirection = mouseWorldPos - currentPos;
+        mouseDirection = (mouseWorldPos - currentPos).normalized;
 
         // rotate weapon
         weapon.transform.right = mouseDirection;

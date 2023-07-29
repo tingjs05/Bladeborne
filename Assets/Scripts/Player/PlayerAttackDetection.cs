@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerAttackDetection : MonoBehaviour
 {
+    public event System.Action<GameObject> enemyHit;
+
     void OnTriggerEnter2D(Collider2D collider)
     {
         manageCollision(collider);
@@ -14,7 +16,7 @@ public class PlayerAttackDetection : MonoBehaviour
         // only detect enemy isTrigger collider
         if (collider.CompareTag("Enemy") && collider.isTrigger)
         {
-            Debug.Log("Enemy Hit!");
+            enemyHit?.Invoke(collider.gameObject);
         }
     }
 }

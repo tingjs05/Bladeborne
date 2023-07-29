@@ -58,11 +58,19 @@ public class Bar : MonoBehaviour
         // add sliders to sliders list
         getSliders();
 
-        // set each slider
-        foreach (Slider slider in sliders)
+        // set slider value to the value directly since there is only 1 slider
+        if (sliders.Count == 1)
         {
             // set slider value to current value
-            slider.value = value / sliders.Count;
+            sliders[0].value = value;
+            return;
+        }
+
+        // set the value of each slider in the bar
+        foreach (Slider slider in sliders)
+        {
+            // set slider value to current value divided by the number of sliders
+            slider.value = (value + slider.maxValue) / sliders.Count;
         }
     }
 }

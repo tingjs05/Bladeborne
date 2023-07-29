@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScorchtailPatrolState : ScorchtailBaseState
 {
-    bool targetDetected = false;
+    private bool targetDetected = false;
 
     public override void OnEnter(ScorchtailStateMachine enemy)
     {
@@ -13,6 +13,9 @@ public class ScorchtailPatrolState : ScorchtailBaseState
 
         // set animation to idle
         enemy.animator.Play("Scorchtail_Idle");
+
+        // flip sprite if needed
+        enemy.sprite.flipX = enemy.flipSprite;
     }
 
     public override void OnUpdate(ScorchtailStateMachine enemy)

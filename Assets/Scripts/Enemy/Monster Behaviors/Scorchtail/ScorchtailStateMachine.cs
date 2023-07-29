@@ -25,18 +25,30 @@ public class ScorchtailStateMachine : MonoBehaviour
     public EnemyMovementAI movement {get; private set;}
     public ScorchtailStats stats {get; private set;}
 
-    // inspector properties
+    // private inspector fields
+    [Header("UI")]
+    [SerializeField] private Bar healthBar;
+
+    // public inspector properties
+    [field: Header("Layer Masks")]
     [field: SerializeField] public LayerMask playerLayerMask {get; private set;}
     [field: SerializeField] public LayerMask playerAttackMask {get; private set;}
     [field: SerializeField] public LayerMask obstacleLayerMask {get; private set;}
+
+    [field: Header("Movement")]
     [field: SerializeField] public float minRunDistance {get; private set;} = 2.5f;
     [field: SerializeField] public float patrolRange {get; private set;} = 5.0f;
     [field: SerializeField] public float patrolDelay {get; private set;} = 2.0f;
-    [field: SerializeField] public float attackRange {get; private set;} = 0.6f;
+
+    [field: Header("Detection")]
+    [field: SerializeField] public float attackRange {get; private set;} = 0.75f;
 
     // other public properties
     public Vector2 moveDirection {get; private set;} = Vector2.zero;
     public float durationSinceLastPatrol {get; private set;} = 0f;
+
+    // public fields
+    [HideInInspector] public bool flipSprite = false;
 
     void Awake()
     {
@@ -62,6 +74,12 @@ public class ScorchtailStateMachine : MonoBehaviour
         movement = transform.GetChild(1).gameObject.GetComponent<EnemyMovementAI>();
         stats = GetComponent<ScorchtailStats>();
 
+        // set health bar to max health
+        healthBar.setMax(stats.maxHealth);
+
+        // set current health to max health
+        stats.Health = stats.maxHealth;
+
         // set default state
         state = idle;
         state.OnEnter(this);
@@ -70,6 +88,9 @@ public class ScorchtailStateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // update health bar
+        healthBar.setValue(stats.Health);
+
         // update state
         state.OnUpdate(this);
 
@@ -92,5 +113,10 @@ public class ScorchtailStateMachine : MonoBehaviour
     public void resetPatrolCounter()
     {
         durationSinceLastPatrol = 0f;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(new Vector2(transform.position.x - 0.5f, transform.position.y), 0.75f);
     }
 }
