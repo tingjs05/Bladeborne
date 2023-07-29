@@ -2051,7 +2051,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 241025798}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.45, z: 0}
+  m_LocalPosition: {x: 0, y: -25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14625,12 +14625,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d4301bfe2bb2c748aefc01dc631ea05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLayerMask:
+  <playerLayerMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 192
+  <playerAttackMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 64
+  <obstacleLayerMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 512
   <minRunDistance>k__BackingField: 2.5
   <patrolRange>k__BackingField: 5
   <patrolDelay>k__BackingField: 4
+  <attackRange>k__BackingField: 0.6
 --- !u!114 &1690770388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22045,6 +22052,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1690770379}
     m_Modifications:
+    - target: {fileID: 2182541653989406843, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
+      propertyPath: showGizmos
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2614627634529003523, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -22089,6 +22100,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4174104336646878554, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
+      propertyPath: showGizmos
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4696817700001768113, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: showGizmos
       value: 0
@@ -22098,6 +22113,10 @@ PrefabInstance:
       value: Context Steering
       objectReference: {fileID: 0}
     - target: {fileID: 8241223872517771214, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
+      propertyPath: showGizmos
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9052384929854077798, guid: c78734c548163a5418260b3ecbceaaaa, type: 3}
       propertyPath: showGizmos
       value: 0
       objectReference: {fileID: 0}

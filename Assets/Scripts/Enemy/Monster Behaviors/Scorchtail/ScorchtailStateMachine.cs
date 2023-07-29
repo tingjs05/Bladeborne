@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ScorchtailStateMachine : MonoBehaviour
 {
-    // test commit
-
     // current state
     private ScorchtailBaseState state;
 
@@ -27,13 +25,17 @@ public class ScorchtailStateMachine : MonoBehaviour
     public EnemyMovementAI movement {get; private set;}
     public ScorchtailStats stats {get; private set;}
 
-    // inspector fields
+    // inspector properties
+    [field: SerializeField] public LayerMask playerLayerMask {get; private set;}
+    [field: SerializeField] public LayerMask playerAttackMask {get; private set;}
+    [field: SerializeField] public LayerMask obstacleLayerMask {get; private set;}
     [field: SerializeField] public float minRunDistance {get; private set;} = 2.5f;
     [field: SerializeField] public float patrolRange {get; private set;} = 5.0f;
     [field: SerializeField] public float patrolDelay {get; private set;} = 2.0f;
+    [field: SerializeField] public float attackRange {get; private set;} = 0.6f;
 
-    // public properties
-    public Vector2 moveDirection {get; private set;}
+    // other public properties
+    public Vector2 moveDirection {get; private set;} = Vector2.zero;
     public float durationSinceLastPatrol {get; private set;} = 0f;
 
     void Awake()
@@ -63,10 +65,6 @@ public class ScorchtailStateMachine : MonoBehaviour
         // set default state
         state = idle;
         state.OnEnter(this);
-
-        // subscribe to events
-        movement.targetDetected += targetDetected;
-        movement.targetReached += targetReached;
     }
 
     // Update is called once per frame
@@ -75,12 +73,8 @@ public class ScorchtailStateMachine : MonoBehaviour
         // update state
         state.OnUpdate(this);
 
-        if (state.Equals(chase))
-        {
-            Debug.Log("getting direction");
-            // update move direction
-            moveDirection = movement.getDirectionToMove();
-        }
+        // update move direction
+        moveDirection = movement.getDirectionToMove();
 
         // increment duration since last patrol
         durationSinceLastPatrol += Time.deltaTime;
@@ -98,16 +92,5 @@ public class ScorchtailStateMachine : MonoBehaviour
     public void resetPatrolCounter()
     {
         durationSinceLastPatrol = 0f;
-    }
-
-    // event handlers
-    private void targetDetected()
-    {
-        switchState(chase);
-    }
-
-    private void targetReached()
-    {
-        switchState(idle);
     }
 }

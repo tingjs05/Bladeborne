@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class ScorchtailPatrolState : ScorchtailBaseState
 {
+    bool targetDetected = false;
+
     public override void OnEnter(ScorchtailStateMachine enemy)
     {
-        Debug.Log("Patrolling...");
-        // play idle animation in case not changing to chase state to patrol
+        // subscribe to target detected event
+        enemy.movement.targetDetected += onTargetDetected;
+
+        // set animation to idle
         enemy.animator.Play("Scorchtail_Idle");
     }
 
@@ -22,13 +26,35 @@ public class ScorchtailPatrolState : ScorchtailBaseState
             // get random location around the enemy within patrol range
             Vector2 randomPoint = (Vector2) enemy.transform.position + Random.insideUnitCircle * enemy.patrolRange;
 
+            // check for obstacles in that direction using ray cast
+            RaycastHit2D hit = Physics2D.Raycast(enemy.transform.position, ((Vector2) enemy.transform.position - randomPoint), Vector2.Distance(enemy.transform.position, randomPoint), enemy.obstacleLayerMask);
+            // if an obstacle is detected, travel to the closest possible point in that direction
+            if (hit.collider != null)
+            {
+                randomPoint = hit.point;
+            } 
+
             // set new target positions to chase
             enemy.movement.setOverrideTargetPosition(new List<Vector2>() {randomPoint});
+        }
+
+        // if taget is detected (either from patrol or detected player), switch to chase state to chase target
+        if (targetDetected)
+        {
+            enemy.switchState(enemy.chase);
         }
     }
 
     public override void OnExit(ScorchtailStateMachine enemy)
     {
+        // reset target detected boolean to false
+        targetDetected = false;
+    }
 
+    // event handlers
+    private void onTargetDetected()
+    {   
+        // set target detected boolean to true when target is detected
+        targetDetected = true;
     }
 }

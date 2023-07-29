@@ -54,12 +54,12 @@ public class EnemyMovementAI : MonoBehaviour
     {
         if (data.targets != null || data.targets?.Count > 0)
         {
-            // raise event if reached target (no current target) and target is within range
+            // raise event if reached target (no current target) and target is detected within range
             if (data.currentTarget == Vector2.zero)
             {
                 targetReached?.Invoke();
             }
-            // raise an event if targets are detected but not reached
+            // raise an event if targets are detected, and not reached
             else
             {
                 targetDetected?.Invoke();
