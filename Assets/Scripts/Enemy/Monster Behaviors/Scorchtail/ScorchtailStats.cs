@@ -21,7 +21,7 @@ public class ScorchtailStats : EnemyStats
     [field: SerializeField] public float tailAttackRange {get; private set;} = 0.75f;
 
     [field: Header("Roll Attack")]
-    [field: SerializeField] public float rollAttackDamage {get; private set;} = 250.0f;
+    [field: SerializeField] public float rollAttackDamage {get; private set;} = 150.0f;
     [field: SerializeField] public float rollAttackRange {get; private set;} = 0.8f;
     [field: SerializeField] public float rollAttackSpeed {get; private set;} = 3.0f;
 

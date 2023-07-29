@@ -30,11 +30,11 @@ public class ScorchtailPatrolState : ScorchtailBaseState
             Vector2 randomPoint = (Vector2) enemy.transform.position + Random.insideUnitCircle * enemy.patrolRange;
 
             // check for obstacles in that direction using ray cast
-            RaycastHit2D hit = Physics2D.Raycast(enemy.transform.position, ((Vector2) enemy.transform.position - randomPoint), Vector2.Distance(enemy.transform.position, randomPoint), enemy.obstacleLayerMask);
+            Vector2 obstacleLocation = enemy.obstacleInDirection((randomPoint - (Vector2) enemy.transform.position).normalized, Vector2.Distance(enemy.transform.position, randomPoint));
             // if an obstacle is detected, travel to the closest possible point in that direction
-            if (hit.collider != null)
+            if (obstacleLocation != Vector2.zero)
             {
-                randomPoint = hit.point;
+                randomPoint = obstacleLocation;
             } 
 
             // set new target positions to chase

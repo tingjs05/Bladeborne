@@ -35,7 +35,7 @@ public class ScorchtailChaseState : ScorchtailBaseState
         }
         // if target has not been reached, but theres no direction, that means target si within range, but has been lost, so switch to patrol state
         // or if there are obstacles in the way and more than max state duration (meaning the enemy got stuck), so it would switch to patrol state to try to unstuck itself
-        else if (enemy.moveDirection == Vector2.zero || (obstacleInWay(enemy.transform.position, enemy.moveDirection, minObstacleDistance, enemy.obstacleLayerMask) && durationInState >= maxStuckDuration))
+        else if (enemy.moveDirection == Vector2.zero || (enemy.obstacleInDirection(enemy.moveDirection, minObstacleDistance) != Vector2.zero && durationInState >= maxStuckDuration))
         {
             enemy.switchState(enemy.patrol);
             // ensure it doesnt run the code below when need to switch state
@@ -84,21 +84,6 @@ public class ScorchtailChaseState : ScorchtailBaseState
             moveSpeed = enemy.stats.walkSpeed;
             enemy.animator.Play("Scorchtail_Walk");
         }
-    }
-
-    private bool obstacleInWay(Vector2 position, Vector2 direction, float distance, LayerMask obstacleLayerMask)
-    {
-        // check for obstacles in that direction using ray cast
-        RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, obstacleLayerMask);
-
-        // if an obstacle is detected, return true
-        if (hit.collider != null)
-        {
-            return true;
-        }
-
-        // else return false
-        return false;
     }
 
     // event handlers

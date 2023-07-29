@@ -23,7 +23,7 @@ public class ScorchtailIdleState : ScorchtailBaseState
     public override void OnUpdate(ScorchtailStateMachine enemy)
     {
         // if player is within attack range and duration since last attack is more than attac cooldown (or there is no last attack), attack the player
-        if (playersInAttackRange(enemy.transform.position, enemy.attackRange, enemy.playerLayerMask) && (durationSinceLastAttack >= enemy.attackCooldown || !attacked))
+        if (enemy.playersInRange(enemy.attackRange) && (durationSinceLastAttack >= enemy.attackCooldown || !attacked))
         {
             // randomly choose betwwen tail whip or scratch attack
             System.Random rand = new System.Random();
@@ -36,12 +36,29 @@ public class ScorchtailIdleState : ScorchtailBaseState
             if (choice == 0)
             {
                 enemy.switchState(enemy.tailAtk);
+                // ensure only one state change option is chosen
                 return;
             }
             // higher chance to use scratch attack
             else
             {
                 enemy.switchState(enemy.scratchAtk);
+                // ensure only one state change option is chosen
+                return;
+            }
+        }
+
+        // check if player is within range for a roll attack, and not within min range
+        if (enemy.playersInRange(enemy.rollAttackActivationRange) && !enemy.playersInRange(enemy.rollAttackMinRange))
+        {
+            // random chance to activate roll attack
+            System.Random rand = new System.Random();
+            int choice = rand.Next(0, 3);
+
+            if (choice == 0)
+            {
+                enemy.switchState(enemy.rollAtk);
+                // ensure only one state change option is chosen
                 return;
             }
         }
@@ -63,22 +80,6 @@ public class ScorchtailIdleState : ScorchtailBaseState
     {
         // reset target detected boolean to false
         targetDetected = false;
-    }
-
-    // detect if players are within attack range
-    public bool playersInAttackRange(Vector2 position, float attackRange, LayerMask playerLayerMask)
-    {
-        // detect players within range
-        Collider2D[] players = Physics2D.OverlapCircleAll(position, attackRange, playerLayerMask);
-
-        // if any player is detected, return true
-        if (players != null && players?.Length > 0)
-        {
-            return true;
-        }
-
-        // else return false
-        return false;
     }
 
     // event handlers

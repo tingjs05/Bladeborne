@@ -30,8 +30,9 @@ public class ScorchtailScratchAttackState : ScorchtailBaseState
         if (durationInState >= attackDelay && !attacked)
         {
             attacked = true;
+            
             // attack player
-            attack(enemy.transform.position, enemy.stats.scratchAttackRange, enemy.playerAttackMask, enemy.stats.scratchAttackDamage);
+            enemy.attack(enemy.transform.position, enemy.stats.scratchAttackRange, enemy.stats.scratchAttackDamage);
         }
 
         // switch back to idle state when attack is done
@@ -44,17 +45,5 @@ public class ScorchtailScratchAttackState : ScorchtailBaseState
     public override void OnExit(ScorchtailStateMachine enemy)
     {
         
-    }
-
-    private void attack(Vector2 position, float attackRange, LayerMask playerLayerMask, float damage)
-    {
-        // detect players in range
-        Collider2D[] players = Physics2D.OverlapCircleAll(position, attackRange, playerLayerMask);
-
-        // damage each player hit
-        foreach (Collider2D player in players)
-        {
-            player.GetComponent<PlayerController>().Health -= damage;
-        }
     }
 }

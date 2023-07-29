@@ -25,12 +25,7 @@ public class ScorchtailStateMachine : MonoBehaviour
     public EnemyMovementAI movement {get; private set;}
     public ScorchtailStats stats {get; private set;}
 
-    // public inspector properties
-    [field: Header("Layer Masks")]
-    [field: SerializeField] public LayerMask playerLayerMask {get; private set;}
-    [field: SerializeField] public LayerMask playerAttackMask {get; private set;}
-    [field: SerializeField] public LayerMask obstacleLayerMask {get; private set;}
-
+    // inspector properties
     [field: Header("Movement")]
     [field: SerializeField] public float minRunDistance {get; private set;} = 2.5f;
     [field: SerializeField] public float patrolRange {get; private set;} = 5.0f;
@@ -39,14 +34,23 @@ public class ScorchtailStateMachine : MonoBehaviour
     [field: Header("Attacks")]
     [field: SerializeField] public float attackRange {get; private set;} = 0.75f;
     [field: SerializeField] public float attackCooldown {get; private set;} = 0.7f;
+    [field: SerializeField] public float rollAttackActivationRange {get; private set;} = 5.0f;
+    [field: SerializeField] public float rollAttackMinRange {get; private set;} = 2.5f;
 
-    // private inspector fields
+    [field: Header("Stun")]
+    [field: SerializeField] public float stunDuration {get; private set;} = 5.0f;
+
     [Header("UI")]
     [SerializeField] private Bar healthBar;
 
     [Header("Return to Spawn Behavior")]
     [SerializeField] private Vector2 spawnLocation = Vector2.zero;
     [SerializeField] private float spawnRadius = 12.0f;
+
+    [field: Header("Layer Masks")]
+    [field: SerializeField] public LayerMask playerLayerMask {get; private set;}
+    [SerializeField] private LayerMask playerAttackMask;
+    [SerializeField] private LayerMask obstacleLayerMask;
 
     // other public properties
     public Vector2 moveDirection {get; private set;} = Vector2.zero;
@@ -121,6 +125,51 @@ public class ScorchtailStateMachine : MonoBehaviour
     public void resetPatrolCounter()
     {
         durationSinceLastPatrol = 0f;
+    }
+
+    // detect if players are within a range
+    public bool playersInRange(float range)
+    {
+        // detect players within range
+        Collider2D[] players = Physics2D.OverlapCircleAll(transform.position, range, playerLayerMask);
+
+        // if any player is detected, return true
+        if (players != null && players?.Length > 0)
+        {
+            return true;
+        }
+
+        // else return false
+        return false;
+    }
+
+    // check if there are any obstacles in the direction, if so, return the position of the obstacle
+    public Vector2 obstacleInDirection(Vector2 direction, float distance)
+    {
+        // check for obstacles in a direction using ray cast
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, distance, obstacleLayerMask);
+
+        // if an obstacle is detected, return the closest point to that obstacle
+        if (hit.collider != null)
+        {
+            return hit.point;
+        } 
+
+        // else return (0, 0)
+        return Vector2.zero;
+    }
+
+    // attack the player
+    public void attack(Vector2 position, float range, float damage)
+    {
+        // detect players in range
+        Collider2D[] players = Physics2D.OverlapCircleAll(position, range, playerAttackMask);
+
+        // damage each player hit
+        foreach (Collider2D player in players)
+        {
+            player.GetComponent<PlayerController>().Health -= damage;
+        }
     }
 
     // check if current location is within spawn radius
