@@ -33,7 +33,7 @@ public class ScorchtailStateMachine : MonoBehaviour
 
     [field: Header("Attacks")]
     [field: SerializeField] public float attackRange {get; private set;} = 0.75f;
-    [field: SerializeField] public float attackCooldown {get; private set;} = 0.7f;
+    [field: SerializeField] public float attackCooldown {get; private set;} = 1.0f;
     [field: SerializeField] public float rollAttackActivationRange {get; private set;} = 5.0f;
     [field: SerializeField] public float rollAttackMinRange {get; private set;} = 2.5f;
 

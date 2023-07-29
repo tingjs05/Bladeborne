@@ -3,8 +3,8 @@ using UnityEngine;
 public class ScorchtailScratchAttackState : ScorchtailBaseState
 {
     private float durationInState;
-    private float attackDelay = 0.4f;
-    private float maxStateDuration = 0.7f;
+    private float attackDelay = 0.55f;
+    private float maxStateDuration = 0.85f;
     private bool attacked;
 
     public override void OnEnter(ScorchtailStateMachine enemy)
@@ -30,7 +30,7 @@ public class ScorchtailScratchAttackState : ScorchtailBaseState
         if (durationInState >= attackDelay && !attacked)
         {
             attacked = true;
-            
+
             // attack player
             enemy.attack(enemy.transform.position, enemy.stats.scratchAttackRange, enemy.stats.scratchAttackDamage);
         }

@@ -2051,7 +2051,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 241025798}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.45, z: 0}
+  m_LocalPosition: {x: -1, y: -25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2105,7 +2105,7 @@ MonoBehaviour:
   <dodgeSpeed>k__BackingField: 15
   <dodgeSpeedDropOffScale>k__BackingField: 50
   <minDodgeSpeed>k__BackingField: 5
-  <dodgeStaminaCost>k__BackingField: 20
+  <dodgeStaminaCost>k__BackingField: 10
   <weapon>k__BackingField: {fileID: 1944933101}
   <attackDamage1>k__BackingField: 30
   <attackDamage2>k__BackingField: 15
@@ -14629,7 +14629,7 @@ MonoBehaviour:
   <patrolRange>k__BackingField: 5
   <patrolDelay>k__BackingField: 2
   <attackRange>k__BackingField: 0.75
-  <attackCooldown>k__BackingField: 0.7
+  <attackCooldown>k__BackingField: 1
   <rollAttackActivationRange>k__BackingField: 5
   <rollAttackMinRange>k__BackingField: 2.5
   <stunDuration>k__BackingField: 5

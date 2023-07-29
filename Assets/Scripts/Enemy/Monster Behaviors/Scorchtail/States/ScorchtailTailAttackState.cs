@@ -3,8 +3,8 @@ using UnityEngine;
 public class ScorchtailTailAttackState : ScorchtailBaseState
 {
     private float durationInState;
-    private float attackDelay = 0.5f;
-    private float maxStateDuration = 0.9f;
+    private float attackDelay = 0.65f;
+    private float maxStateDuration = 1.05f;
     private float attackOffset = -0.5f;
     private bool attacked;
 
