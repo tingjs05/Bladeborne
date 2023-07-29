@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ScorchtailStateMachine : MonoBehaviour
 {
+    // test commit
+
     // current state
     private ScorchtailBaseState state;
 
