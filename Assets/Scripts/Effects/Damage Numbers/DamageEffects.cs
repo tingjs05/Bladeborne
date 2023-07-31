@@ -19,7 +19,7 @@ public class DamageEffects : MonoBehaviour
         // set the parent game object
         if (parentGameObject != null)
         {
-            damagePopupTransform.parent = parentGameObject;
+            damagePopupTransform.SetParent(parentGameObject);
         }
 
         // get damage popup script to set damage text
