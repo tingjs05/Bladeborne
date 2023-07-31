@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
     public GameObject attackRange {get; private set;}
     public PolygonCollider2D attackCollider {get; private set;}
     public PlayerAttackDetection attackDetection {get; private set;}
+    public DamageEffects damageEffects {get; private set;}
 
     // health
     [field: Header("Health")]
@@ -137,6 +138,9 @@ public class PlayerController : MonoBehaviour
 
         // get attack detection component
         attackDetection = attackRange.GetComponent<PlayerAttackDetection>();
+
+        // get damage effect componenet
+        damageEffects = GetComponent<DamageEffects>();
 
         // get weapon sprite object from weapon object
         weaponSprite = weapon.transform.GetChild(0).gameObject;

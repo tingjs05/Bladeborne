@@ -52,6 +52,9 @@ public class PlayerSecondAttackState : PlayerBaseState
         {
             enemy.GetComponent<EnemyStats>().changeHealth(-player.attackDamage2);
 
+            // create damage number popup
+            player.damageEffects.Create(enemy.transform.position, Mathf.RoundToInt(player.attackDamage2));
+
             // log the enemies that have been hit
             enemiesHit.Add(enemy);
         }

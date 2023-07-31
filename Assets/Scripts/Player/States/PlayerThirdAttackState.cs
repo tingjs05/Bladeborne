@@ -58,6 +58,9 @@ public class PlayerThirdAttackState : PlayerBaseState
         {
             enemy.GetComponent<EnemyStats>().changeHealth(-player.attackDamage3);
 
+            // create damage number popup
+            player.damageEffects.Create(enemy.transform.position, Mathf.RoundToInt(player.attackDamage3));
+
             // log the enemies that have been hit
             enemiesHit.Add(enemy);
         }

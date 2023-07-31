@@ -42,3 +42,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Damage Numbers
+    uniqueID: 277238211
+    locked: 0

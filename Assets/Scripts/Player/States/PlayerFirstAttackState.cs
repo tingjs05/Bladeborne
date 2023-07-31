@@ -55,6 +55,9 @@ public class PlayerFirstAttackState : PlayerBaseState
         {
             enemy.GetComponent<EnemyStats>().changeHealth(-player.attackDamage1);
 
+            // create damage number popup
+            player.damageEffects.Create(enemy.transform.position, Mathf.RoundToInt(player.attackDamage1));
+
             // log the enemies that have been hit
             enemiesHit.Add(enemy);
         }

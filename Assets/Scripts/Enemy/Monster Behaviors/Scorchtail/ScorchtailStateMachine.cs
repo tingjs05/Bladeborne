@@ -60,6 +60,9 @@ public class ScorchtailStateMachine : MonoBehaviour
     // public fields
     [HideInInspector] public bool flipSprite = false;
 
+    // private fields
+    private DamageEffects damageEffects;
+
     void Awake()
     {
         // create instance of each state
@@ -83,6 +86,7 @@ public class ScorchtailStateMachine : MonoBehaviour
         //get script reference
         movement = transform.GetChild(1).gameObject.GetComponent<EnemyMovementAI>();
         stats = GetComponent<ScorchtailStats>();
+        damageEffects = GetComponent<DamageEffects>();
 
         // set health bar to max health
         healthBar.setMax(stats.maxHealth);
@@ -170,6 +174,9 @@ public class ScorchtailStateMachine : MonoBehaviour
         foreach (Collider2D player in players)
         {
             player.GetComponent<PlayerController>().Health -= damage;
+
+            // create damage effect
+            damageEffects.Create(player.transform.position, Mathf.RoundToInt(damage));
         }
     }
 
