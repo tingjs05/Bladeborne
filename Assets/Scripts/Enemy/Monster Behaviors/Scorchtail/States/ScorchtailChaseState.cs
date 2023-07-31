@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ScorchtailChaseState : ScorchtailBaseState
 {
-    private float flipThreshold = 0.15f;
     private float moveSpeed = 0f;
     private float targetDistance = 0f;
     private bool targetReached = false;
@@ -49,10 +48,10 @@ public class ScorchtailChaseState : ScorchtailBaseState
         enemy.rb.velocity = moveSpeed * enemy.moveDirection;
 
         // flip sprite according to direction
-        enemy.sprite.flipX = enemy.moveDirection.x > flipThreshold;
+        enemy.sprite.flipX = enemy.moveDirection.x > enemy.flipThreshold;
 
         // cache whether sprite is flipped
-        enemy.flipSprite = enemy.moveDirection.x > flipThreshold;
+        enemy.flipSprite = enemy.moveDirection.x > enemy.flipThreshold;
 
         // increment duration in state
         durationInState += Time.deltaTime;

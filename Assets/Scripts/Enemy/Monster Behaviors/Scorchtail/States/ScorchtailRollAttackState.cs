@@ -43,6 +43,12 @@ public class ScorchtailRollAttackState : ScorchtailBaseState
 
     public override void OnUpdate(ScorchtailStateMachine enemy)
     {
+        // update sprite flip
+        enemy.sprite.flipX = direction.x > enemy.flipThreshold;
+
+        // set flip sprite boolean
+        enemy.flipSprite = direction.x > enemy.flipThreshold;
+
         // if health is lower than first entered state (the enemy got hit) and player has not been hit, enter stunned state
         if (enemy.stats.health < healthOnEnter)
         {

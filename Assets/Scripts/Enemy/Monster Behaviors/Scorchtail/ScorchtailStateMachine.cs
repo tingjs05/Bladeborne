@@ -42,6 +42,7 @@ public class ScorchtailStateMachine : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private Bar healthBar;
+    [field: SerializeField] public float flipThreshold {get; private set;} = 0.15f;
 
     [Header("Return to Spawn Behavior")]
     [SerializeField] private Vector2 spawnLocation = Vector2.zero;

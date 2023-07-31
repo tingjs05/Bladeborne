@@ -10,6 +10,9 @@ public class ScorchtailStunState : ScorchtailBaseState
 
         // reset duration in state to 0
         durationInState = 0f;
+
+        // update sprite flip
+        enemy.sprite.flipX = enemy.flipSprite;
     }
 
     public override void OnUpdate(ScorchtailStateMachine enemy)
