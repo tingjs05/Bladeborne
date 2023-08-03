@@ -14,8 +14,8 @@ TagManager:
   - UI
   - Player
   - Player Invulnerable
-  - Enemy
   - Obstacle
+  - 
   - 
   - 
   - 
@@ -42,6 +42,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Damage Numbers
-    uniqueID: 277238211
+  - name: Display On Top
+    uniqueID: 1518301879
     locked: 0
