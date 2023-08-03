@@ -24,7 +24,7 @@ public class CameraShake : MonoBehaviour
             timeElapsed += Time.deltaTime;
 
             // yield control after moving camera
-            yield return  null;
+            yield return null;
         }
 
         // reset camera position to original position
