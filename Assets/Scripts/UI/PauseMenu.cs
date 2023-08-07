@@ -61,6 +61,24 @@ public class PauseMenu : MonoBehaviour
         cooldown = true;
     }
 
+    public void disablePause(bool disable)
+    {
+        // if pause is disabled, cannot pause
+        canPause = !disable;
+
+        // if cannot pause, unpause the game if paused
+        if (!canPause && isPaused)
+        {
+            togglePause();
+        }
+        else if (canPause)
+        {
+            // start can pause cooldown
+            cooldown = true;
+        }
+    }
+
+    // on click methods
     public void returnFromLevel(int sceneIndex)
     {   
         // unpause the game before switching scenes if game is paused
@@ -78,22 +96,5 @@ public class PauseMenu : MonoBehaviour
         // log that we have quit the game
         Debug.Log("Quit Game!");
         Application.Quit();
-    }
-
-    public void disablePause(bool disable)
-    {
-        // if pause is disabled, cannot pause
-        canPause = !disable;
-
-        // if cannot pause, unpause the game if paused
-        if (!canPause && isPaused)
-        {
-            togglePause();
-        }
-        else if (canPause)
-        {
-            // start can pause cooldown
-            cooldown = true;
-        }
     }
 }

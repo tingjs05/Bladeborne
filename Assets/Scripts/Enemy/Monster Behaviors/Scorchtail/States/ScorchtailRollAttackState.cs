@@ -36,7 +36,7 @@ public class ScorchtailRollAttackState : ScorchtailBaseState
         }
 
         // cache health when just entered state
-        healthOnEnter = enemy.stats.health;
+        healthOnEnter = enemy.stats.getHealth();
 
         enemy.animator.Play("Scorchtail_Roll_Attack");
     }
@@ -50,7 +50,7 @@ public class ScorchtailRollAttackState : ScorchtailBaseState
         enemy.flipSprite = direction.x > enemy.flipThreshold;
 
         // if health is lower than first entered state (the enemy got hit) and player has not been hit, enter stunned state
-        if (enemy.stats.health < healthOnEnter)
+        if (enemy.stats.getHealth() < healthOnEnter)
         {
             enemy.switchState(enemy.stun);
         }

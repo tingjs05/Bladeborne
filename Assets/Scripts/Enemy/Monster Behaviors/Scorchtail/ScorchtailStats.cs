@@ -6,7 +6,7 @@ public class ScorchtailStats : EnemyStats
 {
     [field: Header("Health")]
     [field: SerializeField] public float maxHealth {get; private set;} = 1500.0f;
-    public float health {get; private set;}
+    private float health;
 
     [field: Header("Movement")]
     [field: SerializeField] public float walkSpeed {get; private set;} = 1.2f;
@@ -24,6 +24,12 @@ public class ScorchtailStats : EnemyStats
     [field: SerializeField] public float rollAttackDamage {get; private set;} = 150.0f;
     [field: SerializeField] public float rollAttackRange {get; private set;} = 0.8f;
     [field: SerializeField] public float rollAttackSpeed {get; private set;} = 3.0f;
+
+    // public method to get health
+    public override float getHealth()
+    {
+        return health;
+    }
 
     // public method to set health
     public override void setHealth(float value)

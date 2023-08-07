@@ -178,7 +178,13 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        // do not update if time scale is 0 (game is paused)
+        if (Time.timeScale == 0f)
+        {
+            return;
+        }
+
         // update health and stamina bar
         healthBar.setValue(Health);
         staminaBar.setValue(Stamina);

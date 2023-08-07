@@ -106,7 +106,7 @@ public class ScorchtailStateMachine : MonoBehaviour
         checkLocation();
 
         // update health bar
-        healthBar.setValue(stats.health);
+        healthBar.setValue(stats.getHealth());
 
         // update state
         state.OnUpdate(this);
