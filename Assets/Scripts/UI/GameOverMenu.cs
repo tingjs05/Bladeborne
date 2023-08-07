@@ -13,6 +13,8 @@ public class GameOverMenu : MonoBehaviour
     [SerializeField] private EnemyStats[] enemies;
     private bool isOpen;
 
+    public event System.Action<bool> hasWon;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,11 +33,15 @@ public class GameOverMenu : MonoBehaviour
         {
             // only open menu if condition is met, and menu is not open
             openMenu(winMenu);
+            // invoke event
+            hasWon?.Invoke(true);
         }
         else if (checkLose() && !isOpen)
         {
             // only open menu if condition is met, and menu is not open
             openMenu(loseMenu);
+            // invoke event
+            hasWon?.Invoke(false);
         }
     }
 

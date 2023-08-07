@@ -53,6 +53,12 @@ public class PlayerThirdAttackState : PlayerBaseState
 
     public override void OnUpdate(PlayerController player)
     {
+        // check if the player is still alive
+        if (player.Health <= 0f)
+        {
+            player.switchState(player.death);
+        }
+
         // deal damage if an enemy is hit and has not been hit before
         if (enemy != null && !enemiesHit.Contains(enemy))
         {

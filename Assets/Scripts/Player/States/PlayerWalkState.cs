@@ -15,6 +15,12 @@ public class PlayerWalkState : PlayerBaseState
         // update input
         player.updateInput();
 
+        // check if the player is still alive
+        if (player.Health <= 0f)
+        {
+            player.switchState(player.death);
+        }
+
         // check if the player wants to attack
         if (Input.GetKeyDown(player.attackKey))
         {

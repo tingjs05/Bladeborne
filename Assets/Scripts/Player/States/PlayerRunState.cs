@@ -22,6 +22,12 @@ public class PlayerRunState : PlayerBaseState
         // update input
         player.updateInput();
 
+        // check if the player is still alive
+        if (player.Health <= 0f)
+        {
+            player.switchState(player.death);
+        }
+
         // check sheath key input, can unsheath weapon after run state
         if (Input.GetKeyDown(player.sheathKey))
         {

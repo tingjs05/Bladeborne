@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public PlayerWalkState walk {get; private set;}
     public PlayerRunState run {get; private set;}
     public PlayerDodgeState dodge {get; private set;}
+    public PlayerDeathState death {get; private set;}
     public PlayerFirstAttackState attack1 {get; private set;}
     public PlayerSecondAttackState attack2 {get; private set;}
     public PlayerThirdAttackState attack3 {get; private set;}
@@ -119,6 +120,7 @@ public class PlayerController : MonoBehaviour
         walk = new PlayerWalkState();
         run = new PlayerRunState();
         dodge = new PlayerDodgeState();
+        death = new PlayerDeathState();
         attack1 = new PlayerFirstAttackState();
         attack2 = new PlayerSecondAttackState();
         attack3 = new PlayerThirdAttackState();
