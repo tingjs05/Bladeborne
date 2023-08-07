@@ -94,6 +94,9 @@ public class ScorchtailStateMachine : MonoBehaviour
         // set current health to max health
         stats.setHealth(stats.maxHealth);
 
+        // subscribe to targetDetected event
+        movement.targetDetected += showHealthBar;
+
         // set default state
         state = idle;
         state.OnEnter(this);
@@ -192,6 +195,16 @@ public class ScorchtailStateMachine : MonoBehaviour
         else if (movement.getData().currentTarget ==  spawnLocation)
         {
             movement.setOverrideTargetPosition();
+        }
+    }
+
+    // event handlers
+    private void showHealthBar()
+    {
+        // show health bar if health bar is not active (not shown)
+        if (!healthBar.gameObject.activeSelf)
+        {
+            healthBar.gameObject.SetActive(true);
         }
     }
 }
