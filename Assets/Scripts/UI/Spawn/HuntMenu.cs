@@ -5,17 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class HuntMenu : MonoBehaviour
 {
+    [SerializeField] private GameObject menu;
     [SerializeField] private PauseMenu pauseMenu;
     [SerializeField] private GameObject[] otherUIElements;
     private bool isOpen = false;
-    private GameObject menu;
     private KeyCode exitKey = KeyCode.Escape;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        menu = transform.GetChild(0).gameObject;
-    }
 
     // Update is called once per frame
     void Update()
@@ -37,6 +31,12 @@ public class HuntMenu : MonoBehaviour
     // method to open/close menu
     public void openMenu(bool open)
     {
+        // only open menu if menu is not null
+        if (menu == null)
+        {
+            return;
+        }
+
         // open the menu by setting the menu game object to active if want to open menu
         if (open)
         {

@@ -6,18 +6,12 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public static bool isPaused {get; private set;} = false;
+    [SerializeField] private GameObject pauseMenu;
     [SerializeField] private float pauseCooldown = 0.2f;
     private bool canPause = true;
     private bool cooldown = false;
     private float cooldownCounter = 0f;
-    private GameObject pauseMenu;
     private KeyCode pauseKey = KeyCode.Escape;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        pauseMenu = transform.GetChild(0).gameObject;
-    }
 
     // Update is called once per frame
     void Update()

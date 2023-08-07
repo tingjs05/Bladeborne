@@ -50,6 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 278461c022cc646498f9f6edcb72227c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 3430877618675560363}
+  pauseCooldown: 0.2
 --- !u!1 &325368739300508210
 GameObject:
   m_ObjectHideFlags: 0
