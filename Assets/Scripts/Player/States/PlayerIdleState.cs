@@ -9,6 +9,9 @@ public class PlayerIdleState : PlayerBaseState
 
         // play idle animation
         player.playerAnimator.Play("Player_Idle");
+
+        // stop sound
+        player.sound.stopSound();
     }
 
     public override void OnUpdate(PlayerController player)

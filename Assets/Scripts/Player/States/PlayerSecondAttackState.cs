@@ -35,6 +35,9 @@ public class PlayerSecondAttackState : PlayerBaseState
         // activate attack
         player.attackRange.SetActive(true);
 
+        // play attack sound
+        player.sound.playSound("Player Attack 2");
+
         // subscribe to enemy hit event
         player.attackDetection.enemyHit += dealDamage;
 

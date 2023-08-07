@@ -107,6 +107,10 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer playerRenderer;
     private SpriteRenderer weaponRenderer;
 
+    // sound
+    [field: Header("Sound")]
+    [field: SerializeField] public PlayerSoundEffects sound {get; private set;}
+
     // controls
     public KeyCode sprintKey {get; private set;} = KeyCode.LeftShift;
     public KeyCode dodgeKey {get; private set;} = KeyCode.Space;

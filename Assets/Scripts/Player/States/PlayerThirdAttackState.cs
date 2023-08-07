@@ -77,6 +77,9 @@ public class PlayerThirdAttackState : PlayerBaseState
             // activate attack
             player.attackRange.SetActive(true);
 
+            // play attack sound
+            player.sound.playSound("Player Attack 3");
+
             // move player a little in the direction of the attack by adding a impulse force
             player.rb.AddForce(player.mouseDirection * attackForce, ForceMode2D.Impulse);
 

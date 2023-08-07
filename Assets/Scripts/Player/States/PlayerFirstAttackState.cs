@@ -38,6 +38,9 @@ public class PlayerFirstAttackState : PlayerBaseState
         // activate attack
         player.attackRange.SetActive(true);
 
+        // play attack sound
+        player.sound.playSound("Player Attack 1");
+
         // subscribe to enemy hit event
         player.attackDetection.enemyHit += dealDamage;
 

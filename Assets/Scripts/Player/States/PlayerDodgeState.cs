@@ -11,6 +11,9 @@ public class PlayerDodgeState : PlayerBaseState
         // play dodge animation
         player.playerAnimator.Play("Player_Dodge");
 
+        // play dodge sound
+        player.sound.playSound("Player Dodge");
+
         // set player layer to ignore damage
         player.gameObject.layer = LayerMask.NameToLayer("Player Invulnerable");
 
