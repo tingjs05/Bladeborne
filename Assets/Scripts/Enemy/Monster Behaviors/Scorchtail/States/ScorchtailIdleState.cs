@@ -14,6 +14,9 @@ public class ScorchtailIdleState : ScorchtailBaseState
 
         enemy.animator.Play("Scorchtail_Idle");
 
+        // stop sound effects
+        enemy.sound.stopSound();
+
         // flip sprite if needed
         enemy.sprite.flipX = enemy.flipSprite;
 
@@ -22,6 +25,12 @@ public class ScorchtailIdleState : ScorchtailBaseState
 
     public override void OnUpdate(ScorchtailStateMachine enemy)
     {
+        // check if enemy is still alive
+        if (enemy.stats.getHealth() <= 0f)
+        {
+            enemy.switchState(enemy.death);
+        }
+
         // if player is within attack range and duration since last attack is more than attac cooldown (or there is no last attack), attack the player
         if (enemy.playersInRange(enemy.attackRange) && (durationSinceLastAttack >= enemy.attackCooldown || !attacked))
         {

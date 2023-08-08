@@ -12,6 +12,7 @@ public class ScorchtailStateMachine : MonoBehaviour
     public ScorchtailChaseState chase {get; private set;}
     public ScorchtailPatrolState patrol {get; private set;}
     public ScorchtailStunState stun {get; private set;}
+    public ScorchtailDeathState death {get; private set;}
     public ScorchtailRollAttackState rollAtk {get; private set;}
     public ScorchtailTailAttackState tailAtk {get; private set;}
     public ScorchtailScratchAttackState scratchAtk {get; private set;}
@@ -44,6 +45,9 @@ public class ScorchtailStateMachine : MonoBehaviour
     [SerializeField] private Bar healthBar;
     [field: SerializeField] public float flipThreshold {get; private set;} = 0.15f;
 
+    [field: Header("Sound")]
+    [field: SerializeField] public SoundEffects sound {get; private set;}
+
     [Header("Return to Spawn Behavior")]
     [SerializeField] private Vector2 spawnLocation = Vector2.zero;
     [SerializeField] private float spawnRadius = 12.0f;
@@ -70,6 +74,7 @@ public class ScorchtailStateMachine : MonoBehaviour
         chase = new ScorchtailChaseState();
         patrol = new ScorchtailPatrolState();
         stun = new ScorchtailStunState();
+        death = new ScorchtailDeathState();
         rollAtk = new ScorchtailRollAttackState();
         tailAtk = new ScorchtailTailAttackState();
         scratchAtk = new ScorchtailScratchAttackState();
@@ -84,7 +89,7 @@ public class ScorchtailStateMachine : MonoBehaviour
         animator = transform.GetChild(0).gameObject.GetComponent<Animator>();
 
         //get script reference
-        movement = transform.GetChild(1).gameObject.GetComponent<EnemyMovementAI>();
+        movement = transform.GetChild(2).gameObject.GetComponent<EnemyMovementAI>();
         stats = GetComponent<ScorchtailStats>();
         damageEffects = GetComponent<DamageEffects>();
 

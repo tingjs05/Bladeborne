@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class PlayerSoundEffects : MonoBehaviour
+public class SoundEffects : MonoBehaviour
 {
     [SerializeField] private string[] soundNames;
     [SerializeField] private AudioClip[] soundClips;
@@ -23,7 +23,7 @@ public class PlayerSoundEffects : MonoBehaviour
         }
     }
 
-    public void playSound(string sound)
+    public void playSound(string sound, bool loop = false)
     {
         int index = Array.IndexOf(soundNames, sound);
 
@@ -37,6 +37,8 @@ public class PlayerSoundEffects : MonoBehaviour
         stopSound();
         // set audio clip
         audioSource.clip = soundClips[index];
+        // set loop
+        audioSource.loop = loop;
         // play audio
         audioSource.Play();
     }

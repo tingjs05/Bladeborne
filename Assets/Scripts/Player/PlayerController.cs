@@ -104,12 +104,12 @@ public class PlayerController : MonoBehaviour
     public GameObject weaponSprite {get; private set;}
     public Animator playerAnimator {get; private set;}
     public Animator weaponAnimator {get; private set;}
-    private SpriteRenderer playerRenderer;
-    private SpriteRenderer weaponRenderer;
+    public SpriteRenderer playerRenderer {get; private set;}
+    public SpriteRenderer weaponRenderer {get; private set;}
 
     // sound
     [field: Header("Sound")]
-    [field: SerializeField] public PlayerSoundEffects sound {get; private set;}
+    [field: SerializeField] public SoundEffects sound {get; private set;}
 
     // controls
     public KeyCode sprintKey {get; private set;} = KeyCode.LeftShift;

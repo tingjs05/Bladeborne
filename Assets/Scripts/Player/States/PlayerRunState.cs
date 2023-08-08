@@ -10,7 +10,7 @@ public class PlayerRunState : PlayerBaseState
         player.playerAnimator.Play("Player_Run");
 
         // play run sound
-        player.sound.playSound("Player Run");
+        player.sound.playSound("Player Run", true);
 
         //check if player's weapon is sheathed, otherwise sheath weapon
         if (!player.isSheathed)

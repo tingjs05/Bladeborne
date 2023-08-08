@@ -50,7 +50,7 @@ public class GameOverMenu : MonoBehaviour
     {
         menu.SetActive(true);
         // pause game when bringing up menu
-        Time.timeScale = 0f;
+        Time.timeScale = 0.5f;
         // set isOpen to true
         isOpen = true;
         // do not allow player to pause

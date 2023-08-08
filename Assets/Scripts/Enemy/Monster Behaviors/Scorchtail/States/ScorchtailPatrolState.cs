@@ -14,12 +14,21 @@ public class ScorchtailPatrolState : ScorchtailBaseState
         // set animation to idle
         enemy.animator.Play("Scorchtail_Idle");
 
+        // stop sound effects
+        enemy.sound.stopSound();
+
         // flip sprite if needed
         enemy.sprite.flipX = enemy.flipSprite;
     }
 
     public override void OnUpdate(ScorchtailStateMachine enemy)
     {
+        // check if enemy is still alive
+        if (enemy.stats.getHealth() <= 0f)
+        {
+            enemy.switchState(enemy.death);
+        }
+
         // only set a new target if duration since last patrol is more than the patrol delay
         if (enemy.durationSinceLastPatrol >= enemy.patrolDelay)
         {

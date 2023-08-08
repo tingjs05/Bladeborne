@@ -39,10 +39,19 @@ public class ScorchtailRollAttackState : ScorchtailBaseState
         healthOnEnter = enemy.stats.getHealth();
 
         enemy.animator.Play("Scorchtail_Roll_Attack");
+
+        // play sound
+        enemy.sound.playSound("Roll Attack", true);
     }
 
     public override void OnUpdate(ScorchtailStateMachine enemy)
     {
+        // check if enemy is still alive
+        if (enemy.stats.getHealth() <= 0f)
+        {
+            enemy.switchState(enemy.death);
+        }
+
         // update sprite flip
         enemy.sprite.flipX = direction.x > enemy.flipThreshold;
 

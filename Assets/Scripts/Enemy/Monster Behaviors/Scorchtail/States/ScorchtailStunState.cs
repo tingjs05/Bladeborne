@@ -8,6 +8,9 @@ public class ScorchtailStunState : ScorchtailBaseState
     {
         enemy.animator.Play("Scorchtail_Stun");
 
+        // play sound
+        enemy.sound.playSound("Stun");
+
         // reset duration in state to 0
         durationInState = 0f;
 
@@ -17,6 +20,12 @@ public class ScorchtailStunState : ScorchtailBaseState
 
     public override void OnUpdate(ScorchtailStateMachine enemy)
     {
+        // check if enemy is still alive
+        if (enemy.stats.getHealth() <= 0f)
+        {
+            enemy.switchState(enemy.death);
+        }
+
         // increment duration in state
         durationInState += Time.deltaTime;
 

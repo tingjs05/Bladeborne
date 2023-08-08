@@ -24,6 +24,12 @@ public class ScorchtailTailAttackState : ScorchtailBaseState
 
     public override void OnUpdate(ScorchtailStateMachine enemy)
     {
+        // check if enemy is still alive
+        if (enemy.stats.getHealth() <= 0f)
+        {
+            enemy.switchState(enemy.death);
+        }
+
         // increment duration in state
         durationInState += Time.deltaTime;
 
@@ -46,6 +52,9 @@ public class ScorchtailTailAttackState : ScorchtailBaseState
 
             // attack player
             enemy.attack(attackPosition, enemy.stats.tailAttackRange, enemy.stats.tailAttackDamage);
+
+            // play attack sound
+            enemy.sound.playSound("Tail Attack");
         }
 
         // switch back to idle state when attack is done

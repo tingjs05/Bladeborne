@@ -10,7 +10,7 @@ public class PlayerWalkState : PlayerBaseState
         player.playerAnimator.Play("Player_Walk");
 
         // play walk sound
-        player.sound.playSound("Player Walk");
+        player.sound.playSound("Player Walk", true);
     }
 
     public override void OnUpdate(PlayerController player)

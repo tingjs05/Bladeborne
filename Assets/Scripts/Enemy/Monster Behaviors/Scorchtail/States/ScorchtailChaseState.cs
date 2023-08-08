@@ -25,6 +25,12 @@ public class ScorchtailChaseState : ScorchtailBaseState
 
     public override void OnUpdate(ScorchtailStateMachine enemy)
     {
+        // check if enemy is still alive
+        if (enemy.stats.getHealth() <= 0f)
+        {
+            enemy.switchState(enemy.death);
+        }
+
         // if the target has been reached, return to idle state
         if (targetReached)
         {
@@ -76,12 +82,14 @@ public class ScorchtailChaseState : ScorchtailBaseState
         {
             moveSpeed = enemy.stats.runSpeed;
             enemy.animator.Play("Scorchtail_Run");
+            enemy.sound.playSound("Run", true);
         }
         // else if the target is closer than minRunDistance, walk towards the target
         else
         {
             moveSpeed = enemy.stats.walkSpeed;
             enemy.animator.Play("Scorchtail_Walk");
+            enemy.sound.playSound("Walk", true);
         }
     }
 

@@ -450,8 +450,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9151080446290382445}
-  - component: {fileID: 9132629945665092935}
   - component: {fileID: 529050069638835357}
+  - component: {fileID: 9132629945665092935}
   m_Layer: 6
   m_Name: Player Sound Effects
   m_TagString: Untagged
@@ -474,32 +474,6 @@ Transform:
   m_Father: {fileID: 4939152966918196904}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9132629945665092935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5781430190554997077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a3b091e3ffc9094db912a213d874df7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soundNames:
-  - Player Walk
-  - Player Run
-  - Player Dodge
-  - Player Attack 1
-  - Player Attack 2
-  - Player Attack 3
-  soundClips:
-  - {fileID: 8300000, guid: d84f760416e1a9643a3ae22ba70e2a2a, type: 3}
-  - {fileID: 8300000, guid: cc5a1e42a3ee87c459f936f6e3558eda, type: 3}
-  - {fileID: 8300000, guid: 2bc464dd930ed9743838a8c92ff5d3b8, type: 3}
-  - {fileID: 8300000, guid: 2808c497e6230164e80d32e5a562629d, type: 3}
-  - {fileID: 8300000, guid: a2d1bc56622ee4747b8bc715efbdd709, type: 3}
-  - {fileID: 8300000, guid: 6e926efd62d9d704d89efc71a9c9298c, type: 3}
 --- !u!82 &529050069638835357
 AudioSource:
   m_ObjectHideFlags: 0
@@ -596,6 +570,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &9132629945665092935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5781430190554997077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a3b091e3ffc9094db912a213d874df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundNames:
+  - Player Walk
+  - Player Run
+  - Player Dodge
+  - Player Attack 1
+  - Player Attack 2
+  - Player Attack 3
+  soundClips:
+  - {fileID: 8300000, guid: d84f760416e1a9643a3ae22ba70e2a2a, type: 3}
+  - {fileID: 8300000, guid: cc5a1e42a3ee87c459f936f6e3558eda, type: 3}
+  - {fileID: 8300000, guid: 2bc464dd930ed9743838a8c92ff5d3b8, type: 3}
+  - {fileID: 8300000, guid: 2808c497e6230164e80d32e5a562629d, type: 3}
+  - {fileID: 8300000, guid: a2d1bc56622ee4747b8bc715efbdd709, type: 3}
+  - {fileID: 8300000, guid: 6e926efd62d9d704d89efc71a9c9298c, type: 3}
 --- !u!1 &8907018425427840178
 GameObject:
   m_ObjectHideFlags: 0
