@@ -33,6 +33,12 @@ public class SoundEffects : MonoBehaviour
             return;
         }
 
+        // do not play sound if audio source is null
+        if (audioSource == null)
+        {
+            return;
+        }
+
         // stop current audio if something is playing
         stopSound();
         // set audio clip
@@ -45,7 +51,7 @@ public class SoundEffects : MonoBehaviour
 
     public void stopSound()
     {
-        // stop current audio if something is playing
+        // stop audio if audio is playing
         if (audioSource.isPlaying)
         {
             audioSource.Stop();

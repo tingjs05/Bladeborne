@@ -1,15 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class HuntMenu : MonoBehaviour
 {
     [SerializeField] private GameObject menu;
     [SerializeField] private PauseMenu pauseMenu;
+    [SerializeField] private LoadingScreen loadingScreen;
     [SerializeField] private GameObject[] otherUIElements;
     private bool isOpen = false;
     private KeyCode exitKey = KeyCode.Escape;
+    private SoundEffects sound;
+    private Coroutine sceneSwitch;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        // get sound effects component
+        sound = GetComponent<SoundEffects>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -24,8 +33,16 @@ public class HuntMenu : MonoBehaviour
     // go to selected level
     public void goToLevel(int levelIndex)
     {
+        // only switch scene if not already switching scene
+        if (sceneSwitch != null)
+        {
+            return;
+        }
+
+        // play teleport sound
+        sound.playSound("Teleport");
         // switch scene to level
-        SceneManager.LoadScene(levelIndex);
+        sceneSwitch = StartCoroutine(delaySceneChange(levelIndex, 2.0f));
     }
 
     // method to open/close menu
@@ -40,6 +57,8 @@ public class HuntMenu : MonoBehaviour
         // open the menu by setting the menu game object to active if want to open menu
         if (open)
         {
+            // play open menu sound
+            sound.playSound("Open");
             // show menu
             menu.SetActive(open);
             // make sure the user cannot pause when hunt menu is open
@@ -51,6 +70,8 @@ public class HuntMenu : MonoBehaviour
             return;
         }
 
+        // play close menu sound
+        sound.playSound("Close");
         // show other ui elements when closing menu
         setUI(!open);
         // set isOpen boolean
@@ -68,5 +89,21 @@ public class HuntMenu : MonoBehaviour
         {
             element.SetActive(open);
         }
+    }
+
+    // wait a while before changing scene
+    private IEnumerator delaySceneChange(int levelIndex, float delay)
+    {
+        float elaspedTime = 0f;
+
+        // increment elaspedTime
+        while (elaspedTime < delay)
+        {
+            elaspedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // load the scene
+        loadingScreen.LoadScene(levelIndex);
     }
 }

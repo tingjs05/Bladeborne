@@ -11,6 +11,8 @@ public class HuntTeleporter : MonoBehaviour
         // check of collider is a player
         if (collider.CompareTag("Player") && !collider.isTrigger)
         {
+            // play teleporter activate sound
+            GetComponent<SoundEffects>().playSound("Activate");
             // open menu when player steps in
             huntMenu.openMenu(true);
         }
@@ -21,6 +23,8 @@ public class HuntTeleporter : MonoBehaviour
         // check of collider is a player
         if (collider.CompareTag("Player") && !collider.isTrigger)
         {
+            // play teleporter deactivate sound
+            GetComponent<SoundEffects>().playSound("Deactivate");
             // close menu when player steps in
             huntMenu.openMenu(false);
         }

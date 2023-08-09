@@ -110,6 +110,7 @@ public class PlayerController : MonoBehaviour
     // sound
     [field: Header("Sound")]
     [field: SerializeField] public SoundEffects sound {get; private set;}
+    [SerializeField] private SoundEffects weaponSound;
 
     // controls
     public KeyCode sprintKey {get; private set;} = KeyCode.LeftShift;
@@ -299,6 +300,9 @@ public class PlayerController : MonoBehaviour
             // change to idle animation
             weaponAnimator.Play("Weapon_Idle");
 
+            // play unsheath sound
+            weaponSound.playSound("Weapon Draw");
+
             // reset adjusted position of weapon
             weaponSprite.transform.Translate(new Vector3(0.1f, 0f, 0f));
 
@@ -307,25 +311,28 @@ public class PlayerController : MonoBehaviour
 
             // make weapon appear in front of player
             weaponRenderer.sortingOrder = 1;
+
+            return;
         }
-        else
-        {
-            // sheath weapon if unsheathed
-            isSheathed = true;
 
-            // change to sheath animation
-            weaponAnimator.Play("Weapon_Sheath");
+        // sheath weapon if unsheathed
+        isSheathed = true;
 
-            // reset weapon rotation before sheathing weapon
-            weapon.transform.right = Vector2.zero;
-            weapon.transform.localScale = Vector3.one;
+        // change to sheath animation
+        weaponAnimator.Play("Weapon_Sheath");
 
-            // adjust position of weapon
-            weaponSprite.transform.Translate(new Vector3(-0.1f, 0f, 0f));
+        // play sheath sound
+        weaponSound.playSound("Weapon Sheath");
 
-            // make weapon appear behind the player
-            weaponRenderer.sortingOrder = -1;
-        }
+        // reset weapon rotation before sheathing weapon
+        weapon.transform.right = Vector2.zero;
+        weapon.transform.localScale = Vector3.one;
+
+        // adjust position of weapon
+        weaponSprite.transform.Translate(new Vector3(-0.1f, 0f, 0f));
+
+        // make weapon appear behind the player
+        weaponRenderer.sortingOrder = -1;
     }
 
     // set attack range

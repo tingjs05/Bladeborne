@@ -8,6 +8,9 @@ public class ScorchtailDeathState : ScorchtailBaseState
     public override void OnEnter(ScorchtailStateMachine enemy)
     {
         paused = false;
+
+        // stop all sounds
+        enemy.sound.stopSound();
     }
 
     public override void OnUpdate(ScorchtailStateMachine enemy)

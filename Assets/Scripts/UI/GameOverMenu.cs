@@ -9,8 +9,10 @@ public class GameOverMenu : MonoBehaviour
     [SerializeField] private GameObject winMenu;
     [SerializeField] private GameObject loseMenu;
     [SerializeField] private PauseMenu pauseMenu;
+    [SerializeField] private LoadingScreen loadingScreen;
     [SerializeField] private PlayerController[] players;
     [SerializeField] private EnemyStats[] enemies;
+    private SoundEffects sound;
     private bool isOpen;
 
     public event System.Action<bool> hasWon;
@@ -18,6 +20,8 @@ public class GameOverMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // get sound effects component
+        sound = GetComponent<SoundEffects>();
         // reset win and lose menus
         winMenu.SetActive(false);
         loseMenu.SetActive(false);
@@ -88,22 +92,28 @@ public class GameOverMenu : MonoBehaviour
     // on click methods
     public void restartLevel()
     {
+        // play click sound
+        sound.playSound("Select");
         // unpause before changing scenes
         Time.timeScale = 1f;
         // switch to current scene to reset scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        loadingScreen.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void returnFromLevel(int sceneIndex)
     {   
+        // play click sound
+        sound.playSound("Select");
         // unpause before changing scenes
         Time.timeScale = 1f;
         // switch scene to scene to return to
-        SceneManager.LoadScene(sceneIndex);
+        loadingScreen.LoadScene(sceneIndex);
     }
 
     public void QuitGame()
     {
+        // play click sound
+        sound.playSound("Select");
         // log that we have quit the game
         Debug.Log("Quit Game!");
         Application.Quit();

@@ -8,6 +8,9 @@ public class PlayerDeathState : PlayerBaseState
     public override void OnEnter(PlayerController player)
     {
         paused = false;
+
+        // stop all sounds
+        player.sound.stopSound();
     }
 
     public override void OnUpdate(PlayerController player)
