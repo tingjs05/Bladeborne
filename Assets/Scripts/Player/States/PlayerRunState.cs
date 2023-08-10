@@ -43,7 +43,7 @@ public class PlayerRunState : PlayerBaseState
             player.switchState(player.dodge);
         }
         // continue sprinting if sprintKey is pressed and stamina is not 0 and there is movement input
-        else if (Input.GetKey(player.sprintKey) && player.Stamina >= 0 && player.input != Vector2.zero)
+        else if (Input.GetKey(player.sprintKey) && player.Stamina > 0 && player.input != Vector2.zero)
         {
             player.rb.velocity = player.input * player.sprintSpeed;
 
