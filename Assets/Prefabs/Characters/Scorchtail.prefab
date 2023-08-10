@@ -206,6 +206,10 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   <flipThreshold>k__BackingField: 0.15
   <sound>k__BackingField: {fileID: 2190273202249443935}
+  <deathParticles>k__BackingField: {fileID: 4582149458544609857, guid: 747c1e5a1b2354846898f776ad79dfb3,
+    type: 3}
+  hitParticles: {fileID: 7643321001324252786, guid: 02ab1eb8551d6394f916c80454067f02,
+    type: 3}
   spawnLocation: {x: 3, y: -25}
   spawnRadius: 12
   <playerLayerMask>k__BackingField:

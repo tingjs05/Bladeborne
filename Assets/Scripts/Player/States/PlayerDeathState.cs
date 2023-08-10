@@ -4,6 +4,7 @@ public class PlayerDeathState : PlayerBaseState
 {
     private float disappearSpeed = 1.5f;
     private bool paused = false;
+    private Transform deathParticles;
 
     public override void OnEnter(PlayerController player)
     {
@@ -11,6 +12,15 @@ public class PlayerDeathState : PlayerBaseState
 
         // stop all sounds
         player.sound.stopSound();
+
+        // set deathParticles to null
+        deathParticles = null;
+
+        // instatiate death particles and store transform
+        deathParticles = Instantiate(player.deathParticles, player.transform.position, Quaternion.identity).transform;
+
+        // set player as parent
+        deathParticles.SetParent(player.transform);
     }
 
     public override void OnUpdate(PlayerController player)
@@ -26,6 +36,9 @@ public class PlayerDeathState : PlayerBaseState
         // pause the game once player has completely disappeared, only pause it once, therefore the paused boolean
         else if (!paused)
         {
+            // destroy death particles
+            Destroy(deathParticles.gameObject);
+            // completely pause game after death
             Time.timeScale = 0f;
             paused = true;
         }

@@ -284,6 +284,10 @@ MonoBehaviour:
   playerSprite: {fileID: 8907018425427840178}
   <sound>k__BackingField: {fileID: 9132629945665092935}
   weaponSound: {fileID: 7560662158925269798}
+  <deathParticles>k__BackingField: {fileID: 4582149458544609857, guid: 747c1e5a1b2354846898f776ad79dfb3,
+    type: 3}
+  <hitParticles>k__BackingField: {fileID: 7643321001324252786, guid: c1cc9af671ff62340aaf0ed74d22256c,
+    type: 3}
 --- !u!114 &3260538962076267706
 MonoBehaviour:
   m_ObjectHideFlags: 0

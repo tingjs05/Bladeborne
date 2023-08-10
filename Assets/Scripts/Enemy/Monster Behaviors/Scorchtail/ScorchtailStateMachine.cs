@@ -48,6 +48,10 @@ public class ScorchtailStateMachine : MonoBehaviour
     [field: Header("Sound")]
     [field: SerializeField] public SoundEffects sound {get; private set;}
 
+    [field: Header("Effects")]
+    [field: SerializeField] public GameObject deathParticles {get; private set;}
+    [SerializeField] public GameObject hitParticles;
+
     [Header("Return to Spawn Behavior")]
     [SerializeField] private Vector2 spawnLocation = Vector2.zero;
     [SerializeField] private float spawnRadius = 12.0f;
@@ -185,6 +189,9 @@ public class ScorchtailStateMachine : MonoBehaviour
 
             // create damage effect
             damageEffects.Create(player.transform.position, Mathf.RoundToInt(damage));
+
+            // instantiate hit particles and set enemy as parent
+            Instantiate(hitParticles, player.transform.position, Quaternion.identity).transform.SetParent(transform);
         }
     }
 

@@ -112,6 +112,11 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public SoundEffects sound {get; private set;}
     [SerializeField] private SoundEffects weaponSound;
 
+    // effects
+    [field: Header("Effects")]
+    [field: SerializeField] public GameObject deathParticles {get; private set;}
+    [field: SerializeField] public GameObject hitParticles {get; private set;}
+
     // controls
     public KeyCode sprintKey {get; private set;} = KeyCode.LeftShift;
     public KeyCode dodgeKey {get; private set;} = KeyCode.Space;

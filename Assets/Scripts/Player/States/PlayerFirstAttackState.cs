@@ -67,6 +67,9 @@ public class PlayerFirstAttackState : PlayerBaseState
             // create damage number popup
             player.damageEffects.Create(enemy.transform.position, Mathf.RoundToInt(player.attackDamage1));
 
+            // instantiate hit particles and set player as parent
+            Instantiate(player.hitParticles, enemy.transform.position, Quaternion.identity).transform.SetParent(player.transform);
+
             // log the enemies that have been hit
             enemiesHit.Add(enemy);
         }
