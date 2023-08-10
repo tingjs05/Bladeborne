@@ -12,4 +12,4 @@ Q - Sheath/Draw Weapon <br>
 Esc - Pause Game <br>
 
 ## Download
-[Click Here to Download!](https://drive.google.com/file/d/1xjPGhGhWCyPQeghna-qChAfTZcAhegiH/view?usp=sharing)
+[Google Drive Download](https://drive.google.com/file/d/1xjPGhGhWCyPQeghna-qChAfTZcAhegiH/view?usp=sharing)
