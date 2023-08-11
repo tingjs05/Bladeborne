@@ -10,8 +10,7 @@ You play as one of these hunters, waking up in a mysterious ruin. It appears to 
 
 ## Instructions
 Upon launching the game and pressing "Play", you will be brought the the Spawn Area (The Abandoned Ruin). There, going to the teleporter will allow you to go to the first level (Grasslands). <br><br>
-When in the first level, your objective is to locate and slay the Scorchtail. <br><br>
-Good luck!
+When in the first level, your objective is to locate and slay the Scorchtail. Good luck!
 
 ## Controls
 WASD - Movement <br>
