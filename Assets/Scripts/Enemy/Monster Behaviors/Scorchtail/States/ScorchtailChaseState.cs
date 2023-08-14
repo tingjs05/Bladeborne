@@ -38,7 +38,7 @@ public class ScorchtailChaseState : ScorchtailBaseState
             // ensure it doesnt run the code below when need to switch state
             return;
         }
-        // if target has not been reached, but theres no direction, that means target si within range, but has been lost, so switch to patrol state
+        // if target has not been reached, but theres no direction, that means target is within range, but has been lost, so switch to patrol state
         // or if there are obstacles in the way and more than max state duration (meaning the enemy got stuck), so it would switch to patrol state to try to unstuck itself
         else if (enemy.moveDirection == Vector2.zero || (enemy.obstacleInDirection(enemy.moveDirection, minObstacleDistance) != Vector2.zero && durationInState >= maxStuckDuration))
         {
